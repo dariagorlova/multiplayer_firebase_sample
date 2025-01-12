@@ -1,16 +1,11 @@
 # multiplayer_firebase_sample
 
-A new Flutter project.
+A Multiplayer game sample project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To make it work at your side you have to:
+1. Create a Firebase project in your Firebase console (https://console.firebase.google.com/)
+2. Install and activate flutterfire_cli (https://firebase.flutter.dev/docs/cli/)
+3. With a help of "flutterfire configure" command attach firebase project to this Flutter project
+4. Enable "Anonymous" sign-in method in Firebase console in Build/Authentication section
