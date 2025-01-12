@@ -1,0 +1,22 @@
+{
+    "Serializable freezed model": {
+        "prefix": "fmodel",
+        "description": "Declare a serializable freezed model with Class name equal to file name",
+        "body": [
+            "import 'package:freezed_annotation/freezed_annotation.dart';",
+            "",
+            "part '${TM_FILENAME_BASE}.freezed.dart';",
+            "part '${TM_FILENAME_BASE}.g.dart';",
+            "",
+            "@freezed",
+            "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} with _$${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} {",
+            "  const factory ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}({",
+            "    ${0}",
+            "  }) = _${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g};",
+            "",
+            "  factory ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}.fromJson(Map<String, dynamic> json) => ",
+            "      _$${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}FromJson(json);",
+            "}"
+        ]
+    }
+}

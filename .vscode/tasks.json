@@ -1,0 +1,27 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build and Format",
+            "type": "shell",
+            "command": "dart",
+            "args": [
+                "run",
+                "build_runner",
+                "build",
+                "--delete-conflicting-outputs",
+                "&&",
+                "dart",
+                "format",
+                ".",
+                "-l",
+                "150"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
