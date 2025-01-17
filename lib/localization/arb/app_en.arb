@@ -1,5 +1,14 @@
 {
     "@@locale": "en",
     "enterName": "Enter your name",
-    "createAccount": "Create an account"
+    "createAccount": "Create an account",
+    "operationNotAllowed": "Enable anonymous accounts in the Firebase Console.",
+    "nameIsAlreadyInUse": "This name is already in use. Please choose another one.",
+    "unknownError": "Unknown error. Please try again later.",
+    "reauthenticateBeforeDelete": "Please reauthenticate before deleting your account.",
+    "nameCantBeEmpty": "Name can't be empty. Please enter your name.",
+    "offlineCaption": "You are offline",
+    "offline1": " - Don't panic",
+    "offline2": " - Look around",
+    "offline3": " - Try talk to people"
 }
