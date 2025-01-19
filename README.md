@@ -7,7 +7,7 @@ A Multiplayer game sample project.
 To make it work at your side you have to:
 1. Create a Firebase project in your Firebase console (https://console.firebase.google.com/)
 2. Create Firestore database (Build / Firestore Database section)
-2.1 Sheet Rules have to contain such rules:
+3. Sheet Rules have to contain such rules:
 ```
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -34,8 +34,8 @@ service cloud.firestore {
 }
 ```
 
-3. Create Realtime database (Build / Realtime Database section)
-4. Install and activate flutterfire_cli (https://firebase.flutter.dev/docs/cli/)
-5. With a help of "flutterfire configure" command attach firebase project to this Flutter project
-6. Enable "Anonymous" sign-in method in Firebase console in Build / Authentication section
+4. Create Realtime database (Build / Realtime Database section)
+5. Install and activate flutterfire_cli (https://firebase.flutter.dev/docs/cli/)
+6. With a help of "flutterfire configure" command attach firebase project to this Flutter project
+7. Enable "Anonymous" sign-in method in Firebase console in Build / Authentication section
    
