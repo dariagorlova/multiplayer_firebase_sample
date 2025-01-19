@@ -13,7 +13,7 @@ mixin RouterMixin on State<App> {
     redirect: (context, state) async {
       final gateState = sl<AuthStatusBloc>().state.user;
       final isLoginRoute = state.matchedLocation == AppRoutes.login;
-      final isAuthenticated = gateState.userId != null;
+      final isAuthenticated = gateState.userId != null && gateState.name != null;
 
       // redirect to login page after signOut, and to home page after signIn
       if (isLoginRoute && isAuthenticated) {

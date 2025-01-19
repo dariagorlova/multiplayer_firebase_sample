@@ -19,6 +19,7 @@ class FirebaseServicesException implements LocalizedException {
       FirebaseExceptionKeys.nameIsAlreadyInUse: loc.nameIsAlreadyInUse,
       FirebaseExceptionKeys.reauthenticateBeforeDelete: loc.reauthenticateBeforeDelete,
       FirebaseExceptionKeys.nameCantBeEmpty: loc.nameCantBeEmpty,
+      FirebaseExceptionKeys.requestTimeout: loc.requestTimeout,
     };
 
     return mapExceptions[message] ?? loc.unknownError;

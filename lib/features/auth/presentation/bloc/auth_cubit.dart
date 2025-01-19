@@ -17,11 +17,22 @@ class AuthCubit extends Cubit<AuthState> {
         _notificationMediator = notificationMediator,
         super(const AuthState.initial());
 
-  Future<void> signIn(String name) async {
+  Future<void> signIn() async {
     if (state is _AuthStateLoading) return;
     emit(const AuthState.loading());
     try {
-      await _repository.signIn(name);
+      await _repository.signIn();
+    } on LocalizedException catch (e) {
+      _notificationMediator.notify(AppErrorNotification(e));
+    }
+    emit(const AuthState.initial());
+  }
+
+  Future<void> setName(String name) async {
+    if (state is _AuthStateLoading) return;
+    emit(const AuthState.loading());
+    try {
+      await _repository.setName(name);
     } on LocalizedException catch (e) {
       _notificationMediator.notify(AppErrorNotification(e));
       emit(const AuthState.initial());

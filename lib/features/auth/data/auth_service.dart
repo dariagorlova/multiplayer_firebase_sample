@@ -1,4 +1,5 @@
 abstract class AuthService {
-  Future<bool> signIn(String name);
+  Future<void> signIn();
+  Future<bool> createUserRecord(String name);
   Future<void> signOut();
 }

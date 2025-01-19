@@ -8,6 +8,7 @@ enum ConnectionStatus { unknown, online, offline }
 class UserStatus with _$UserStatus {
   const factory UserStatus({
     String? userId,
+    String? name,
     @Default(ConnectionStatus.unknown) ConnectionStatus? connectionStatus,
   }) = _UserStatus;
 }

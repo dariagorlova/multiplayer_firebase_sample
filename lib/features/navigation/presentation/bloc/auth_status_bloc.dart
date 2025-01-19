@@ -58,6 +58,7 @@ class AuthStatusBloc extends Bloc<AuthStatusBlocEvent, AuthStatusBlocState> with
     emit(state.copyWith(
       user: state.user.copyWith(
         userId: event.user.userId,
+        name: event.user.name,
         connectionStatus: event.user.userId == null ? ConnectionStatus.unknown : event.user.connectionStatus,
       ),
     ));

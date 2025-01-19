@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<AuthCubit>(),
+      create: (context) => sl<AuthCubit>()..signIn(),
       child: const LoginView(),
     );
   }
@@ -59,7 +59,7 @@ class _LoginViewState extends State<LoginView> {
               ),
               IntrinsicHeight(
                 child: ElevatedButton(
-                  onPressed: () => context.read<AuthCubit>().signIn(_nameController.text.trim()),
+                  onPressed: () => context.read<AuthCubit>().setName(_nameController.text.trim()),
                   child: BlocBuilder<AuthCubit, AuthState>(
                     builder: (context, state) => state.when(
                       loading: () => const SizedBox(width: 20, height: 20, child: CircularProgressIndicator()),

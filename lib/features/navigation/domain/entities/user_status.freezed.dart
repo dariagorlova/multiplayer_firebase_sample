@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UserStatus {
   String? get userId => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   ConnectionStatus? get connectionStatus => throw _privateConstructorUsedError;
 
   /// Create a copy of UserStatus
@@ -29,7 +30,7 @@ mixin _$UserStatus {
 abstract class $UserStatusCopyWith<$Res> {
   factory $UserStatusCopyWith(UserStatus value, $Res Function(UserStatus) then) = _$UserStatusCopyWithImpl<$Res, UserStatus>;
   @useResult
-  $Res call({String? userId, ConnectionStatus? connectionStatus});
+  $Res call({String? userId, String? name, ConnectionStatus? connectionStatus});
 }
 
 /// @nodoc
@@ -47,12 +48,17 @@ class _$UserStatusCopyWithImpl<$Res, $Val extends UserStatus> implements $UserSt
   @override
   $Res call({
     Object? userId = freezed,
+    Object? name = freezed,
     Object? connectionStatus = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       connectionStatus: freezed == connectionStatus
           ? _value.connectionStatus
@@ -67,7 +73,7 @@ abstract class _$$UserStatusImplCopyWith<$Res> implements $UserStatusCopyWith<$R
   factory _$$UserStatusImplCopyWith(_$UserStatusImpl value, $Res Function(_$UserStatusImpl) then) = __$$UserStatusImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? userId, ConnectionStatus? connectionStatus});
+  $Res call({String? userId, String? name, ConnectionStatus? connectionStatus});
 }
 
 /// @nodoc
@@ -80,12 +86,17 @@ class __$$UserStatusImplCopyWithImpl<$Res> extends _$UserStatusCopyWithImpl<$Res
   @override
   $Res call({
     Object? userId = freezed,
+    Object? name = freezed,
     Object? connectionStatus = freezed,
   }) {
     return _then(_$UserStatusImpl(
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       connectionStatus: freezed == connectionStatus
           ? _value.connectionStatus
@@ -98,17 +109,19 @@ class __$$UserStatusImplCopyWithImpl<$Res> extends _$UserStatusCopyWithImpl<$Res
 /// @nodoc
 
 class _$UserStatusImpl implements _UserStatus {
-  const _$UserStatusImpl({this.userId, this.connectionStatus = ConnectionStatus.unknown});
+  const _$UserStatusImpl({this.userId, this.name, this.connectionStatus = ConnectionStatus.unknown});
 
   @override
   final String? userId;
+  @override
+  final String? name;
   @override
   @JsonKey()
   final ConnectionStatus? connectionStatus;
 
   @override
   String toString() {
-    return 'UserStatus(userId: $userId, connectionStatus: $connectionStatus)';
+    return 'UserStatus(userId: $userId, name: $name, connectionStatus: $connectionStatus)';
   }
 
   @override
@@ -117,11 +130,12 @@ class _$UserStatusImpl implements _UserStatus {
         (other.runtimeType == runtimeType &&
             other is _$UserStatusImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.connectionStatus, connectionStatus) || other.connectionStatus == connectionStatus));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, connectionStatus);
+  int get hashCode => Object.hash(runtimeType, userId, name, connectionStatus);
 
   /// Create a copy of UserStatus
   /// with the given fields replaced by the non-null parameter values.
@@ -132,10 +146,12 @@ class _$UserStatusImpl implements _UserStatus {
 }
 
 abstract class _UserStatus implements UserStatus {
-  const factory _UserStatus({final String? userId, final ConnectionStatus? connectionStatus}) = _$UserStatusImpl;
+  const factory _UserStatus({final String? userId, final String? name, final ConnectionStatus? connectionStatus}) = _$UserStatusImpl;
 
   @override
   String? get userId;
+  @override
+  String? get name;
   @override
   ConnectionStatus? get connectionStatus;
 

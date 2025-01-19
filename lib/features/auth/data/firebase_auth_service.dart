@@ -20,13 +20,18 @@ class FirebaseAuthService with FirebaseExceptionHandlerMixin implements AuthServ
   CollectionReference<Map<String, dynamic>> get _getUsersCollectionRef => _firestore.collection(FirebaseConsts.usersCollection);
 
   @override
-  Future<bool> signIn(String name) async {
-    // here we want unic name. so, firstly we have to check users collection
-    // but... we are not logged in yet. so, normal rules must cancel out request
-    // we have two ways to do it:
-    // 1. just ignore rules and let anyone to access to user's collection
-    // 2. add credit card to firebase console project))) and use cloud function
-    // hm... interesting idea, but for sample project we'll ignore normal rules
+  Future<void> signIn() async {
+    try {
+      // documentation says, that if there is already an anonymous user signed in, that user will be returned instead
+      // so, we just can use it to get an access to firebase databases
+      await _auth.signInAnonymously();
+    } on FirebaseException catch (e, stack) {
+      handleFirebaseException(e, stack);
+    }
+  }
+
+  @override
+  Future<bool> createUserRecord(String name) async {
     try {
       if (name.isEmpty) {
         throw const FirebaseServicesException(FirebaseExceptionKeys.nameCantBeEmpty);
@@ -36,9 +41,15 @@ class FirebaseAuthService with FirebaseExceptionHandlerMixin implements AuthServ
         // this name is already taken
         throw const FirebaseServicesException(FirebaseExceptionKeys.nameIsAlreadyInUse);
       } else {
-        final response = await _auth.signInAnonymously();
-        final uid = response.user?.uid;
+        final uid = _auth.currentUser?.uid;
+
         if (uid != null) {
+          try {
+            await _auth.currentUser?.updateDisplayName(name);
+          } on FirebaseAuthException catch (e, stack) {
+            handleFirebaseException(e, stack);
+            return false;
+          }
           await _getUsersCollectionRef.doc(uid).set(
             {FirebaseConsts.userNameField: name},
           );

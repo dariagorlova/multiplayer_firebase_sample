@@ -4,6 +4,7 @@
     "createAccount": "Create an account",
     "operationNotAllowed": "Enable anonymous accounts in the Firebase Console.",
     "nameIsAlreadyInUse": "This name is already in use. Please choose another one.",
+    "requestTimeout": "Network error. Check your internet connection.",
     "unknownError": "Unknown error. Please try again later.",
     "reauthenticateBeforeDelete": "Please reauthenticate before deleting your account.",
     "nameCantBeEmpty": "Name can't be empty. Please enter your name.",
