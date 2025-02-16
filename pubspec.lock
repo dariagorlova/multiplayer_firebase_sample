@@ -134,6 +134,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.0"
+  chat_bubbles:
+    dependency: "direct main"
+    description:
+      name: chat_bubbles
+      sha256: "9ee1493b31a7f847363c5d69725ec55db94f720c7c116d403b4d322a4da0f08c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.6.0"
   checked_yaml:
     dependency: transitive
     description:
@@ -302,6 +310,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.19.0"
+  firebase_database:
+    dependency: "direct main"
+    description:
+      name: firebase_database
+      sha256: af9e0b2e8a117d2324027a5632d64b003e710283a20c692e12ebcc439d22be5c
+      url: "https://pub.dev"
+    source: hosted
+    version: "11.3.0"
+  firebase_database_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_database_platform_interface
+      sha256: "6f92dfdd773c40d7b04113ad9e9de66826cd8a9f6c939a3693943eba4adce234"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.6"
+  firebase_database_web:
+    dependency: transitive
+    description:
+      name: firebase_database_web
+      sha256: "6b863cc62cbd5d006d8e36d5407336115d3737cfe1d8574c6d8a3d035d0ed259"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.6+6"
   fixnum:
     dependency: transitive
     description:
@@ -410,6 +442,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  go_router:
+    dependency: "direct main"
+    description:
+      name: go_router
+      sha256: "7c2d40b59890a929824f30d442e810116caf5088482629c894b9e4478c67472d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "14.6.3"
+  go_router_builder:
+    dependency: "direct dev"
+    description:
+      name: go_router_builder
+      sha256: "293e366566c209f70a05508bb5fdd6ce536fa3f75e58ccba1f83341a7943a6be"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.3"
   graphs:
     dependency: transitive
     description:
@@ -530,6 +578,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.1"
+  logger:
+    dependency: "direct main"
+    description:
+      name: logger
+      sha256: be4b23575aac7ebf01f225a241eb7f6b5641eeaf43c6a8613510fc2f8cf187d1
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.0"
   logging:
     dependency: transitive
     description:
@@ -775,6 +831,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  typewrite_text:
+    dependency: "direct main"
+    description:
+      name: typewrite_text
+      sha256: "8c18f9f5d9d8a98e20ac5b433a4a804af509b6d0d1d4f3df7a69eeda44ea5042"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   vector_graphics:
     dependency: transitive
     description:
@@ -873,4 +937,4 @@ packages:
     version: "3.1.3"
 sdks:
   dart: ">=3.6.0 <4.0.0"
-  flutter: ">=3.22.0"
+  flutter: ">=3.27.0"

@@ -1,0 +1,95 @@
+import 'dart:async';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../../core/index.dart';
+import '../../../../core_features/toast_notifications/index.dart';
+import '../../index.dart';
+
+part 'waiting_game_state.dart';
+part 'waiting_game_cubit.freezed.dart';
+
+class WaitingGameCubit extends Cubit<WaitingGameState> {
+  final WaitingGameRepository _repository;
+  final NotificationMediator _notificationMediator;
+  final LoggerService _logger;
+
+  StreamSubscription<GameModel>? _gameSubscription;
+
+  WaitingGameCubit(WaitingGameRepository repository, NotificationMediator notificationMediator, LoggerService logger)
+      : _repository = repository,
+        _notificationMediator = notificationMediator,
+        _logger = logger,
+        super(WaitingGameState.initial());
+
+  Future<void> init(String id) async {
+    emit(state.copyWith(status: WaitingStatus.waiting));
+    try {
+      // we have to tell server that we are in
+      await _repository.addMeToGame(id);
+
+      // start listen to changes in games.active_games.waiting_games.id
+      _listenToChanges(id);
+      emit(state.copyWith(id: id));
+      // no emit here. all emits will be from listenToChanges
+    } on LocalizedException catch (e) {
+      _notificationMediator.notify(AppErrorNotification(e));
+      emit(state.copyWith(status: WaitingStatus.quit));
+    }
+  }
+
+  void _listenToChanges(String id) {
+    _gameSubscription = _repository.listenToChanges(id).listen(
+      (waitingRoomData) {
+        if (waitingRoomData.id.isNotEmpty) {
+          // just update playersIn and count fields of the state
+          final count = waitingRoomData.playersCount;
+          final playersIn = waitingRoomData.players.length;
+          emit(
+            state.copyWith(
+              status: playersIn == count ? WaitingStatus.timer : WaitingStatus.waiting,
+              count: count,
+              playersIn: playersIn,
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  void launchCountdownTimer() {
+    _logger.simple('"start game" button pressed');
+    if (state.playersIn < 2 || state.status != WaitingStatus.waiting) return;
+    emit(state.copyWith(status: WaitingStatus.timer));
+  }
+
+  void startGame() {
+    _logger.simple('countdown timer finished. time to open game screen');
+    emit(state.copyWith(status: WaitingStatus.ready));
+  }
+
+  Future<void> quitGame() async {
+    _logger.simple('"quit game" button pressed');
+    // here we should delete current user id from active_games.id players_in field
+    // and from subcollection waiting_games.id players_in field
+    // if this user is the last user (players_in length before delete == 1),
+    // we should totally delete all about this game from firestore
+    try {
+      _gameSubscription?.cancel();
+      await _repository.quitGame(state.id, state.playersIn == 1);
+      emit(state.copyWith(status: WaitingStatus.quit));
+    } on LocalizedException catch (e) {
+      _notificationMediator.notify(AppErrorNotification(e));
+      emit(state.copyWith(status: WaitingStatus.quit));
+    }
+  }
+
+  @override
+  Future<void> close() {
+    // bloc is destroyed, we don't need it any more
+    _logger.simple('WaitingGameCubit is destroyed');
+    _gameSubscription?.cancel();
+    return super.close();
+  }
+}
