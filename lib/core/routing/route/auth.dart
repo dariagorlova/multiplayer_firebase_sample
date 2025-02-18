@@ -4,6 +4,8 @@ part of '../routes.dart';
 class LoginRoute extends GoRouteData {
   LoginRoute();
 
-  @override
-  Widget build(BuildContext context, GoRouterState state) => const LoginScreen();
+  Widget build(BuildContext context, GoRouterState state) => BlocProvider<AuthCubit>(
+        create: (context) => sl<AuthCubit>()..signIn(),
+        child: const LoginScreen(),
+      );
 }

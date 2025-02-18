@@ -1,3 +1,4 @@
+import '../../../../core/index.dart';
 import '../../index.dart';
 
 class AppNavigationRepositoryImpl implements AppAuthRepository {
@@ -12,12 +13,12 @@ class AppNavigationRepositoryImpl implements AppAuthRepository {
 
   @override
   Stream<UserStatus> get authorizationStatus => _authStatusService.authStatus.asyncMap((authStatus) async {
-        if (authStatus.userId == null) {
-          return authStatus;
-        }
         // if we need to return user data from corresponding table, here is the best place to do it here
         // but now we simply return what we got from service
-        return authStatus;
+        return UserStatus(
+          userId: authStatus[FirebaseConsts.uidField],
+          name: authStatus[FirebaseConsts.userNameField],
+        );
       });
 
   @override

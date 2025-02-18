@@ -10,11 +10,11 @@ class UserNotificationManager {
   void showAppNotification(AppNotification notification) {
     final context = scaffoldMessengerKey.currentContext;
     if (context != null) {
-      showToastMessage(notification.getMessage(context), notification.color);
+      _showToastMessage(notification.getMessage(context), notification.color);
     }
   }
 
-  void showToastMessage(String message, Color color) {
+  void _showToastMessage(String message, Color color) {
     final context = scaffoldMessengerKey.currentContext;
     if (context == null) return;
 

@@ -1,11 +1,16 @@
 export 'constants/consts.dart';
 export 'constants/firebase_consts.dart';
 export 'constants/firebase_exceprion_keys.dart';
+export 'constants/game_exception_keys.dart';
 export 'constants/navigation_key.dart';
 export 'constants/routes_names.dart';
 export 'error/firebase_exception.dart';
+export 'error/game_exceptions.dart';
 export 'interfaces/localize.dart';
 export 'mixins/firebase_exception_mixin.dart';
 export 'service_locator/service_locator.dart';
 export 'services/index.dart';
 export 'routing/index.dart';
+export 'widgets/app_button.dart';
+export 'models/user_model.dart';
+export 'models/game_model.dart';

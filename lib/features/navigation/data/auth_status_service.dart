@@ -1,6 +1,4 @@
-import '../index.dart';
-
 abstract class AuthStatusService {
-  Stream<UserStatus> get authStatus;
+  Stream<Map<String, String?>> get authStatus;
   String? get userId;
 }

@@ -11,10 +11,12 @@ part 'auth_cubit.freezed.dart';
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository _repository;
   final NotificationMediator _notificationMediator;
+  final LoggerService _logger;
 
-  AuthCubit(AuthRepository repository, NotificationMediator notificationMediator)
+  AuthCubit(AuthRepository repository, NotificationMediator notificationMediator, LoggerService logger)
       : _repository = repository,
         _notificationMediator = notificationMediator,
+        _logger = logger,
         super(const AuthState.initial());
 
   Future<void> signIn() async {
@@ -48,5 +50,12 @@ class AuthCubit extends Cubit<AuthState> {
       _notificationMediator.notify(AppErrorNotification(e));
       emit(const AuthState.initial());
     }
+  }
+
+  @override
+  Future<void> close() {
+    // bloc is destroyed, we don't need it any more
+    _logger.simple('AuthCubit is destroyed');
+    return super.close();
   }
 }

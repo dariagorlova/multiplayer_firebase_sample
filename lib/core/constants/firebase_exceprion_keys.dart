@@ -4,4 +4,8 @@ abstract class FirebaseExceptionKeys {
   static const nameCantBeEmpty = 'name-is-empty';
   static const reauthenticateBeforeDelete = 'requires-recent-login';
   static const requestTimeout = 'network-request-failed';
+  static const permissionDenied = 'permission-denied';
+  static const rtdbCreateGameNode = 'game-create-error';
+  static const rtdbAddUser = 'add-user-error';
+  static const rtdbDelUser = 'del-user-error';
 }

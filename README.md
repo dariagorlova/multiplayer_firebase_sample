@@ -22,20 +22,39 @@ service cloud.firestore {
     	return request.auth.uid != null && request.auth.uid == id
     }
     
-    
-    // users document. 
-    // each authorised user has an access to create his own or read all of others
     match /users/{userId} {
       allow read: if isAuthorized();
       allow update, delete: if isAuthor(userId);
       allow create: if isAuthorized();
+    }
+    
+    match /games/{gameId} {
+      allow read, write: if isAuthorized();
     }
   }
 }
 ```
 
 4. Create Realtime database (Build / Realtime Database section)
-5. Install and activate flutterfire_cli (https://firebase.flutter.dev/docs/cli/)
-6. With a help of "flutterfire configure" command attach firebase project to this Flutter project
-7. Enable "Anonymous" sign-in method in Firebase console in Build / Authentication section
+5. Sheet Rules have to contain such rules:
+```
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+
+    "status": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "games": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
+```
+6. Install and activate flutterfire_cli (https://firebase.flutter.dev/docs/cli/)
+7. With a help of "flutterfire configure" command attach firebase project to this Flutter project
+8. Enable "Anonymous" sign-in method in Firebase console in Build / Authentication section
    

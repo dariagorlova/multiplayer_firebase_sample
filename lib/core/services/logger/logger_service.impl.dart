@@ -30,6 +30,9 @@ class LoggerServiceImpl implements LoggerService {
   static LoggerServiceImpl create({required Logger logger}) => LoggerServiceImpl(logger: logger);
 
   @override
+  void simple(String message) => developer.log(message);
+
+  @override
   void warning(String message, {String? title}) => _logger.w(message, error: title);
 
   @override

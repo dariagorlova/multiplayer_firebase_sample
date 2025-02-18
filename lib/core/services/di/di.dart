@@ -17,5 +17,7 @@ class ServicesDI {
           ])),
     );
     sl.registerLazySingleton<LoggerService>(() => logger);
+
+    sl.registerLazySingleton<GameService>(() => RtdbGameService(sl()));
   }
 }

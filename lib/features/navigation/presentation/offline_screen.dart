@@ -17,10 +17,7 @@ class OfflineScreen extends StatelessWidget {
       body: Center(
         child: Container(
           width: min(320, width * 0.7),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.black12,
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.black12),
           padding: const EdgeInsets.all(8),
           child: Row(
             spacing: 24,
@@ -31,10 +28,7 @@ class OfflineScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 8,
                 children: [
-                  Text(
-                    loc.offlineCaption,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+                  Text(loc.offlineCaption, style: Theme.of(context).textTheme.titleMedium),
                   Text(loc.offline1),
                   Text(loc.offline2),
                   Text(loc.offline3),

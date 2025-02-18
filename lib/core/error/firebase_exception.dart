@@ -20,6 +20,10 @@ class FirebaseServicesException implements LocalizedException {
       FirebaseExceptionKeys.reauthenticateBeforeDelete: loc.reauthenticateBeforeDelete,
       FirebaseExceptionKeys.nameCantBeEmpty: loc.nameCantBeEmpty,
       FirebaseExceptionKeys.requestTimeout: loc.requestTimeout,
+      FirebaseExceptionKeys.permissionDenied: loc.permissionDenied,
+      FirebaseExceptionKeys.rtdbCreateGameNode: loc.rtdbCreateGameNode,
+      FirebaseExceptionKeys.rtdbAddUser: loc.rtdbAddUser,
+      FirebaseExceptionKeys.rtdbDelUser: loc.rtdbDelUser,
     };
 
     return mapExceptions[message] ?? loc.unknownError;

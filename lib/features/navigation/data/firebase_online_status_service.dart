@@ -18,13 +18,14 @@ class FirebaseOnlineStatusService implements OnlineStatusService {
     try {
       // here we fill "status" node for current user.
       // onDisconnect or listener on some node helps to keep connection active
-      // if none of these is used, cottection status will live just for 60 seconds
+      // if none of these is used, connection status will live just for 60 seconds
       // and to restore it we should rerun the app. rediculous, but that's how it works
       if (userId == null || userId.isEmpty) {
         return Stream.value(false);
       }
       final connectedRef = _rtdb.ref('.info/connected');
       final onlineStatusRef = _rtdb.ref('status/${userId}');
+      // so, let's make a stream of connection status
       return connectedRef.onValue.map((event) {
         _isConnected = event.snapshot.value as bool? ?? false;
         onlineStatusRef.set({
@@ -32,6 +33,7 @@ class FirebaseOnlineStatusService implements OnlineStatusService {
           'lastActive': ServerValue.timestamp,
         });
 
+        // and create a delayed function, that will automatically update connection status when user disconnects
         if (connected) {
           onlineStatusRef.onDisconnect().set({
             'online': false,

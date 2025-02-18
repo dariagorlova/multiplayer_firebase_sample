@@ -1,30 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/index.dart';
 import '../../../localization/l10n.dart';
 import '../index.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<AuthCubit>()..signIn(),
-      child: const LoginView(),
-    );
-  }
+  State<LoginScreen> createState() => _LoginViewState();
 }
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
-
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
+class _LoginViewState extends State<LoginScreen> {
   final _nameController = TextEditingController();
 
   @override
@@ -36,10 +23,7 @@ class _LoginViewState extends State<LoginView> {
       body: Center(
         child: Container(
           width: width,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.black12,
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.black12),
           padding: const EdgeInsets.all(8),
           child: Row(
             spacing: 16,
@@ -50,11 +34,7 @@ class _LoginViewState extends State<LoginView> {
                 child: TextFormField(
                   controller: _nameController,
                   keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                      hintText: loc.enterName,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      )),
+                  decoration: InputDecoration(hintText: loc.enterName, border: OutlineInputBorder(borderRadius: BorderRadius.circular(16))),
                 ),
               ),
               IntrinsicHeight(
@@ -63,10 +43,7 @@ class _LoginViewState extends State<LoginView> {
                   child: BlocBuilder<AuthCubit, AuthState>(
                     builder: (context, state) => state.when(
                       loading: () => const SizedBox(width: 20, height: 20, child: CircularProgressIndicator()),
-                      initial: () => const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20,
-                      ),
+                      initial: () => const Icon(Icons.arrow_forward_ios, size: 20),
                     ),
                   ),
                 ),
