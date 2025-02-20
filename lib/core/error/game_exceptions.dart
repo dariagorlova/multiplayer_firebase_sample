@@ -21,6 +21,7 @@ class GameExceptions implements LocalizedException {
       GameExceptionKeys.gameDurationError: loc.gameDurationError,
       GameExceptionKeys.selectGameToJoin: loc.selectGameToJoin,
       GameExceptionKeys.invalidGameId: loc.invalidGameId,
+      GameExceptionKeys.youCantStartGame: loc.youCantStartGame,
     };
 
     return mapExceptions[message] ?? loc.unknownError;

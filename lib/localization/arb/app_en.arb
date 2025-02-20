@@ -30,5 +30,9 @@
     "waiting": "Waiting",
     "rtdbCreateGameNode" : "Failed to create game",
     "rtdbAddUser": "Failed to add user to game",
-    "rtdbDelUser": "Failed to remove user from game"
+    "rtdbDelUser": "Failed to remove user from game",
+    "cantQuitNow": "You can't quit now. Game initiation is in progress",
+    "weAreAlmostIn": "Don't worry, we are almost in",
+    "youCantStartGame": "Only the host can start the game",
+    "needMorePlayers": "You can't play alone. Need more players"
 }

@@ -25,5 +25,8 @@ class WaitingGameRepositoryImpl implements WaitingGameRepository {
   @override
   Stream<GameModel> listenToChanges(String id) => _gameService.gameListener(id);
 
+  @override
+  String get myUid => _service.currentUserId;
+
   UserModel makeModelForMe() => UserModel(id: _service.currentUserId, name: _service.currentUserName);
 }

@@ -5,4 +5,5 @@ abstract class GameExceptionKeys {
   static const gameDurationError = 'game-duration-error';
   static const selectGameToJoin = 'select-game-to-join';
   static const invalidGameId = 'invalid-game-id';
+  static const youCantStartGame = 'you-cant-start-game';
 }

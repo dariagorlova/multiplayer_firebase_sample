@@ -9,7 +9,8 @@ class WaitingGameState with _$WaitingGameState {
     required String id,
     required int count,
     required int playersIn,
+    required String host,
   }) = _WaitingGameState;
 
-  factory WaitingGameState.initial() => const WaitingGameState(status: WaitingStatus.initial, id: '', count: 0, playersIn: 0);
+  factory WaitingGameState.initial() => const WaitingGameState(status: WaitingStatus.initial, id: '', count: 0, playersIn: 0, host: '');
 }

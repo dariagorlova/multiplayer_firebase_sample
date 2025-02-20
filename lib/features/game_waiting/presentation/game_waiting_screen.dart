@@ -84,16 +84,8 @@ class _GameWaitingScreenState extends State<GameWaitingScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          AppButton(
-                            child: Text(loc.start.toUpperCase()),
-                            width: buttonSize,
-                            onTap: bloc.launchCountdownTimer,
-                          ),
-                          AppButton(
-                            child: Text(loc.quit.toUpperCase()),
-                            width: buttonSize,
-                            onTap: bloc.quitGame,
-                          ),
+                          AppButton(child: Text(loc.start.toUpperCase()), width: buttonSize, onTap: bloc.launchCountdownTimer),
+                          AppButton(child: Text(loc.quit.toUpperCase()), width: buttonSize, onTap: bloc.quitGame),
                         ],
                       )
                     ],

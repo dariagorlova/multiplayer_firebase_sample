@@ -46,11 +46,13 @@ class WaitingGameCubit extends Cubit<WaitingGameState> {
           // just update playersIn and count fields of the state
           final count = waitingRoomData.playersCount;
           final playersIn = waitingRoomData.players.length;
+          final host = waitingRoomData.players.first.id;
           emit(
             state.copyWith(
               status: playersIn == count ? WaitingStatus.timer : WaitingStatus.waiting,
               count: count,
               playersIn: playersIn,
+              host: host,
             ),
           );
         }
@@ -59,18 +61,31 @@ class WaitingGameCubit extends Cubit<WaitingGameState> {
   }
 
   void launchCountdownTimer() {
-    _logger.simple('"start game" button pressed');
-    if (state.playersIn < 2 || state.status != WaitingStatus.waiting) return;
+    final conditions = {
+      state.status != WaitingStatus.waiting: const AppInfoNotification(GameMessages(GameMessageKeys.weAreAlmostIn)),
+      state.host != _repository.myUid: const AppErrorNotification(GameExceptions(GameExceptionKeys.youCantStartGame)),
+      state.playersIn < 2: const AppInfoNotification(GameMessages(GameMessageKeys.needMorePlayers)),
+    };
+
+    final notification = conditions.entries.cast<MapEntry<bool, AppNotification>?>().firstWhere((entry) => entry!.key, orElse: () => null)?.value;
+    if (notification != null) {
+      _notificationMediator.notify(notification);
+      return;
+    }
+
     emit(state.copyWith(status: WaitingStatus.timer));
   }
 
   void startGame() {
-    _logger.simple('countdown timer finished. time to open game screen');
     emit(state.copyWith(status: WaitingStatus.ready));
   }
 
   Future<void> quitGame() async {
-    _logger.simple('"quit game" button pressed');
+    if (state.status != WaitingStatus.waiting) {
+      _notificationMediator.notify(const AppInfoNotification(GameMessages(GameMessageKeys.cantQuitNow)));
+      return;
+    }
+
     // here we should delete current user id from active_games.id players_in field
     // and from subcollection waiting_games.id players_in field
     // if this user is the last user (players_in length before delete == 1),
