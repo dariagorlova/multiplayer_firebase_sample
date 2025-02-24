@@ -1,7 +1,6 @@
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:typewrite_text/typewrite_text.dart';
 
 import '../../../core/index.dart';
 import '../../../gen/colors.gen.dart';
@@ -20,7 +19,6 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     final bloc = context.read<GameCubit>();
     final loc = context.l10n;
-    const timerTextStyle = TextStyle(fontSize: 30, color: AppColors.purple, fontWeight: FontWeight.bold);
     const playerTextStyle = TextStyle(fontSize: 14, color: AppColors.purple, fontWeight: FontWeight.bold);
     const errorIconSize = 14.0;
     const errorBoxSize = (errorIconSize * AppConst.maxErrors + (AppConst.maxErrors - 1) * 2);
