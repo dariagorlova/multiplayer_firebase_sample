@@ -57,4 +57,9 @@ service cloud.firestore {
 6. Install and activate flutterfire_cli (https://firebase.flutter.dev/docs/cli/)
 7. With a help of "flutterfire configure" command attach firebase project to this Flutter project
 8. Enable "Anonymous" sign-in method in Firebase console in Build / Authentication section
-   
+9. Also, you should create a file "lib/core/constants/ai_key.dart" and put your Gemini API key inside
+```
+const gemini_key = '-== your gemini key ==-';
+```
+To get the API key you have to create a Gemini account on the https://ai.google.dev. 
+  
