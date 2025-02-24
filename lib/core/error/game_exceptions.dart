@@ -22,8 +22,13 @@ class GameExceptions implements LocalizedException {
       GameExceptionKeys.selectGameToJoin: loc.selectGameToJoin,
       GameExceptionKeys.invalidGameId: loc.invalidGameId,
       GameExceptionKeys.youCantStartGame: loc.youCantStartGame,
+      GameExceptionKeys.wordDoesNotStartFromLastLetter: loc.wordDoesNotStartFromLastLetter,
+      GameExceptionKeys.wordDoesNotNoun: loc.wordDoesNotNoun,
+      GameExceptionKeys.wordIsName: loc.wordIsName,
+      GameExceptionKeys.notYourTurn: loc.notYourTurn,
+      GameExceptionKeys.unknownError: loc.unknownError,
     };
 
-    return mapExceptions[message] ?? loc.unknownError;
+    return mapExceptions[message] ?? message;
   }
 }

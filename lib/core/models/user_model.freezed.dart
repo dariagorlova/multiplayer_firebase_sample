@@ -20,8 +20,11 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
+  @JsonKey(name: FirebaseConsts.idField)
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: FirebaseConsts.userNameField)
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: FirebaseConsts.errorCount)
   int get errorCount => throw _privateConstructorUsedError;
 
   /// Serializes this UserModel to a JSON map.
@@ -37,7 +40,10 @@ mixin _$UserModel {
 abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) = _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
-  $Res call({String id, String name, int errorCount});
+  $Res call(
+      {@JsonKey(name: FirebaseConsts.idField) String id,
+      @JsonKey(name: FirebaseConsts.userNameField) String name,
+      @JsonKey(name: FirebaseConsts.errorCount) int errorCount});
 }
 
 /// @nodoc
@@ -80,7 +86,10 @@ abstract class _$$UserModelImplCopyWith<$Res> implements $UserModelCopyWith<$Res
   factory _$$UserModelImplCopyWith(_$UserModelImpl value, $Res Function(_$UserModelImpl) then) = __$$UserModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, int errorCount});
+  $Res call(
+      {@JsonKey(name: FirebaseConsts.idField) String id,
+      @JsonKey(name: FirebaseConsts.userNameField) String name,
+      @JsonKey(name: FirebaseConsts.errorCount) int errorCount});
 }
 
 /// @nodoc
@@ -116,16 +125,21 @@ class __$$UserModelImplCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res, 
 /// @nodoc
 @JsonSerializable()
 class _$UserModelImpl implements _UserModel {
-  const _$UserModelImpl({required this.id, required this.name, this.errorCount = 0});
+  const _$UserModelImpl(
+      {@JsonKey(name: FirebaseConsts.idField) required this.id,
+      @JsonKey(name: FirebaseConsts.userNameField) required this.name,
+      @JsonKey(name: FirebaseConsts.errorCount) this.errorCount = 0});
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) => _$$UserModelImplFromJson(json);
 
   @override
+  @JsonKey(name: FirebaseConsts.idField)
   final String id;
   @override
+  @JsonKey(name: FirebaseConsts.userNameField)
   final String name;
   @override
-  @JsonKey()
+  @JsonKey(name: FirebaseConsts.errorCount)
   final int errorCount;
 
   @override
@@ -163,15 +177,21 @@ class _$UserModelImpl implements _UserModel {
 }
 
 abstract class _UserModel implements UserModel {
-  const factory _UserModel({required final String id, required final String name, final int errorCount}) = _$UserModelImpl;
+  const factory _UserModel(
+      {@JsonKey(name: FirebaseConsts.idField) required final String id,
+      @JsonKey(name: FirebaseConsts.userNameField) required final String name,
+      @JsonKey(name: FirebaseConsts.errorCount) final int errorCount}) = _$UserModelImpl;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) = _$UserModelImpl.fromJson;
 
   @override
+  @JsonKey(name: FirebaseConsts.idField)
   String get id;
   @override
+  @JsonKey(name: FirebaseConsts.userNameField)
   String get name;
   @override
+  @JsonKey(name: FirebaseConsts.errorCount)
   int get errorCount;
 
   /// Create a copy of UserModel

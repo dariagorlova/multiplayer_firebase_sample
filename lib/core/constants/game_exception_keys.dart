@@ -6,4 +6,9 @@ abstract class GameExceptionKeys {
   static const selectGameToJoin = 'select-game-to-join';
   static const invalidGameId = 'invalid-game-id';
   static const youCantStartGame = 'you-cant-start-game';
+  static const wordDoesNotStartFromLastLetter = 'word-does-not-start-from-last-letter';
+  static const wordDoesNotNoun = 'word-does-not-noun';
+  static const wordIsName = 'word-is-name';
+  static const notYourTurn = 'not-your-turn';
+  static const unknownError = 'unknown-error';
 }

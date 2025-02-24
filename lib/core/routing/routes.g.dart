@@ -52,6 +52,10 @@ RouteBase get $homeRoute => GoRouteData.$route(
           path: 'game-process',
           factory: $GameRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: 'game-over',
+          factory: $GameOverRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -126,13 +130,34 @@ extension $WaitingGameRouteExtension on WaitingGameRoute {
 
 extension $GameRouteExtension on GameRoute {
   static GameRoute _fromState(GoRouterState state) => GameRoute(
-        state.uri.queryParameters['extra']!,
+        state.uri.queryParameters['id']!,
       );
 
   String get location => GoRouteData.$location(
         '/game-process',
         queryParams: {
-          'extra': extra,
+          'id': id,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $GameOverRouteExtension on GameOverRoute {
+  static GameOverRoute _fromState(GoRouterState state) => GameOverRoute(
+        result: state.uri.queryParameters['result']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/game-over',
+        queryParams: {
+          'result': result,
         },
       );
 

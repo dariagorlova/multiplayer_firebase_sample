@@ -1,10 +1,13 @@
 abstract class FirebaseConsts {
   //collections & docs
+  static const rtdbStatusNode = 'status';
   static const usersCollection = 'users';
   static const gamesCollection = 'games';
   static const activeGamesDoc = 'active_games';
   //fields
 
+  static const online = 'online';
+  static const lastActive = 'lastActive';
   static const idField = 'id';
   static const uidField = 'uid';
   static const userNameField = 'name';
@@ -17,4 +20,6 @@ abstract class FirebaseConsts {
   static const count = 'count';
   static const curPlayerId = 'cid';
   static const words = 'words';
+  static const errorCount = 'errorCount';
+  static const word = 'word';
 }

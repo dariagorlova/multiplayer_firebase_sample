@@ -65,7 +65,7 @@ class _JoinGameScreenState extends State<JoinGameScreen> {
                   child: BlocConsumer<JoinGameCubit, JoinGameState>(
                     listener: (context, state) {
                       if (state.status == JoinGameStatus.success && state.selectedGame != null) {
-                        WaitingGameRoute(state.selectedGame!.id!).pushReplacement(context);
+                        WaitingGameRoute(state.selectedGame!.id!).go(context);
                       }
                     },
                     builder: (context, state) {

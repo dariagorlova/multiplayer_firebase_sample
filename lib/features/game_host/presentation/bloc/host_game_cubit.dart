@@ -17,7 +17,9 @@ class HostGameCubit extends Cubit<HostGameState> {
       : _repository = repository,
         _notificationMediator = notificationMediator,
         _logger = logger,
-        super(const HostGameState.initial());
+        super(const HostGameState.initial()) {
+    _logger.simple('HostGameCubit is created');
+  }
 
   Future<void> createGame({required String gameName, required int playersCount, required int gameDuration}) async {
     // first of all, nervous users firewall

@@ -1,8 +1,14 @@
 part of 'game_cubit.dart';
 
+enum GameStatus { initial, myTurn, notMyTurn, lose, win }
+
 @freezed
 class GameState with _$GameState {
-  const factory GameState.initial() = _Initial;
-  const factory GameState.loading() = _Loading;
-  const factory GameState.success() = _Success;
+  const factory GameState({
+    required GameStatus status,
+    required GameModel board,
+    required String myName,
+  }) = _GameState;
+
+  factory GameState.initial() => GameState(status: GameStatus.initial, board: GameModel.empty(), myName: '');
 }

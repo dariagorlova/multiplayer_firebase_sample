@@ -19,6 +19,12 @@ class AppColors {
   /// Color: #07A007
   static const Color green = Color(0xFF07A007);
 
+  /// Color: #E8E8EE
+  static const Color grey = Color(0xFFE8E8EE);
+
+  /// Color: #673AB7
+  static const Color purple = Color(0xFF673AB7);
+
   /// Color: #E00707
   static const Color red = Color(0xFFE00707);
 

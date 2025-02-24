@@ -22,6 +22,7 @@ class JoinGameCubit extends Cubit<JoinGameState> {
         _notificationMediator = notificationMediator,
         _logger = logger,
         super(const JoinGameState(activeGames: [], status: JoinGameStatus.initial)) {
+    _logger.simple('JoinGameCubit is created');
     _listenToActiveGames();
   }
 
@@ -51,7 +52,7 @@ class JoinGameCubit extends Cubit<JoinGameState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     // bloc is destroyed, we don't need it any more
     _logger.simple('JoinGameCubit is destroyed');
     _gamesSubscription?.cancel();

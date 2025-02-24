@@ -17,7 +17,9 @@ class AuthCubit extends Cubit<AuthState> {
       : _repository = repository,
         _notificationMediator = notificationMediator,
         _logger = logger,
-        super(const AuthState.initial());
+        super(const AuthState.initial()) {
+    _logger.simple('AuthCubit is created');
+  }
 
   Future<void> signIn() async {
     if (state is _AuthStateLoading) return;

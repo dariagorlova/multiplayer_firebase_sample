@@ -69,7 +69,7 @@ class _HostGameScreenState extends State<HostGameScreen> {
                 child: BlocConsumer<HostGameCubit, HostGameState>(
                   listener: (context, state) => state.maybeWhen(
                     success: (id) {
-                      WaitingGameRoute(id).pushReplacement(context);
+                      WaitingGameRoute(id).go(context);
                       return null;
                     },
                     orElse: () => null,

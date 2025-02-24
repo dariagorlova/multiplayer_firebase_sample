@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 
+import '../../../core/index.dart';
 import '../index.dart';
 
 class FirebaseOnlineStatusService implements OnlineStatusService {
@@ -24,20 +25,20 @@ class FirebaseOnlineStatusService implements OnlineStatusService {
         return Stream.value(false);
       }
       final connectedRef = _rtdb.ref('.info/connected');
-      final onlineStatusRef = _rtdb.ref('status/${userId}');
+      final onlineStatusRef = _rtdb.ref('${FirebaseConsts.rtdbStatusNode}/${userId}');
       // so, let's make a stream of connection status
       return connectedRef.onValue.map((event) {
         _isConnected = event.snapshot.value as bool? ?? false;
         onlineStatusRef.set({
-          'online': connected,
-          'lastActive': ServerValue.timestamp,
+          FirebaseConsts.online: connected,
+          FirebaseConsts.lastActive: ServerValue.timestamp,
         });
 
         // and create a delayed function, that will automatically update connection status when user disconnects
         if (connected) {
           onlineStatusRef.onDisconnect().set({
-            'online': false,
-            'lastActive': ServerValue.timestamp,
+            FirebaseConsts.online: false,
+            FirebaseConsts.lastActive: ServerValue.timestamp,
           });
         }
 

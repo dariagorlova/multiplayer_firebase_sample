@@ -19,14 +19,19 @@ class WaitingGameRepositoryImpl implements WaitingGameRepository {
   Future<void> quitGame(String id, bool isLastOne) async {
     await _service.quit(id, isLastOne);
     // and now the same for rtdb
-    _gameService.quitGame(id, _service.currentUserId, isLastOne);
+    await _gameService.quitGame(id, _gameService.currentUserId, isLastOne);
+  }
+
+  @override
+  Future<void> forceDeleteGameFromFirestore(String id) async {
+    await _service.quit(id, true);
   }
 
   @override
   Stream<GameModel> listenToChanges(String id) => _gameService.gameListener(id);
 
   @override
-  String get myUid => _service.currentUserId;
+  String get myUid => _gameService.currentUserId;
 
-  UserModel makeModelForMe() => UserModel(id: _service.currentUserId, name: _service.currentUserName);
+  UserModel makeModelForMe() => UserModel(id: _gameService.currentUserId, name: _gameService.currentUserName);
 }

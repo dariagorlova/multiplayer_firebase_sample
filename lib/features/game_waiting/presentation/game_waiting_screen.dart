@@ -18,11 +18,17 @@ class GameWaitingScreen extends StatefulWidget {
 
 class _GameWaitingScreenState extends State<GameWaitingScreen> {
   var countdown = 5;
+  late final WaitingGameCubit bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    bloc = context.read<WaitingGameCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
     final loc = context.l10n;
-    final bloc = context.read<WaitingGameCubit>();
     final pannelSize = MediaQuery.sizeOf(context).width * 0.8;
     final buttonSize = pannelSize / 2 - 32;
     const headerStyle = TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black);
