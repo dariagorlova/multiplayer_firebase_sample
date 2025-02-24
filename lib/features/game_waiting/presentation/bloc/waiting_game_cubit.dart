@@ -21,7 +21,9 @@ class WaitingGameCubit extends Cubit<WaitingGameState> {
       : _repository = repository,
         _notificationMediator = notificationMediator,
         _logger = logger,
-        super(WaitingGameState.initial());
+        super(WaitingGameState.initial()) {
+    _logger.simple('WaitingGameCubit is created');
+  }
 
   Future<void> init(String id) async {
     emit(state.copyWith(status: WaitingStatus.waiting));
@@ -60,7 +62,7 @@ class WaitingGameCubit extends Cubit<WaitingGameState> {
     );
   }
 
-  void launchCountdownTimer() {
+  Future<void> launchCountdownTimer() async {
     final conditions = {
       state.status != WaitingStatus.waiting: const AppInfoNotification(GameMessages(GameMessageKeys.weAreAlmostIn)),
       state.host != _repository.myUid: const AppErrorNotification(GameExceptions(GameExceptionKeys.youCantStartGame)),
@@ -76,7 +78,17 @@ class WaitingGameCubit extends Cubit<WaitingGameState> {
     emit(state.copyWith(status: WaitingStatus.timer));
   }
 
-  void startGame() {
+  Future<void> startGame() async {
+    // here we can simply delete data from firestore's "active_games", cuz room is full and we are going to start game
+    // we don't need to wait for delete is done here.
+    // and we want this function to be launched just once, not from all players
+    if (state.host == _repository.myUid) {
+      _logger.simple('erase ${state.id} from "active_games" document');
+      _repository.forceDeleteGameFromFirestore(state.id);
+    }
+    // we dont need a subscription any more. so, we can cancel it here
+    await _gameSubscription?.cancel();
+
     emit(state.copyWith(status: WaitingStatus.ready));
   }
 
@@ -101,10 +113,10 @@ class WaitingGameCubit extends Cubit<WaitingGameState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     // bloc is destroyed, we don't need it any more
     _logger.simple('WaitingGameCubit is destroyed');
-    _gameSubscription?.cancel();
+    await _gameSubscription?.cancel();
     return super.close();
   }
 }

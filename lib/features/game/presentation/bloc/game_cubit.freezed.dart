@@ -16,55 +16,23 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GameState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? success,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  GameStatus get status => throw _privateConstructorUsedError;
+  GameModel get board => throw _privateConstructorUsedError;
+  String get myName => throw _privateConstructorUsedError;
+
+  /// Create a copy of GameState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $GameStateCopyWith<GameState> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $GameStateCopyWith<$Res> {
   factory $GameStateCopyWith(GameState value, $Res Function(GameState) then) = _$GameStateCopyWithImpl<$Res, GameState>;
+  @useResult
+  $Res call({GameStatus status, GameModel board, String myName});
+
+  $GameModelCopyWith<$Res> get board;
 }
 
 /// @nodoc
@@ -78,316 +46,132 @@ class _$GameStateCopyWithImpl<$Res, $Val extends GameState> implements $GameStat
 
   /// Create a copy of GameState
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(_$InitialImpl value, $Res Function(_$InitialImpl) then) = __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res, _$InitialImpl> implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(_$InitialImpl _value, $Res Function(_$InitialImpl) _then) : super(_value, _then);
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = null,
+    Object? board = null,
+    Object? myName = null,
+  }) {
+    return _then(_value.copyWith(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as GameStatus,
+      board: null == board
+          ? _value.board
+          : board // ignore: cast_nullable_to_non_nullable
+              as GameModel,
+      myName: null == myName
+          ? _value.myName
+          : myName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 
   /// Create a copy of GameState
   /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $GameModelCopyWith<$Res> get board {
+    return $GameModelCopyWith<$Res>(_value.board, (value) {
+      return _then(_value.copyWith(board: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$GameStateImplCopyWith<$Res> implements $GameStateCopyWith<$Res> {
+  factory _$$GameStateImplCopyWith(_$GameStateImpl value, $Res Function(_$GameStateImpl) then) = __$$GameStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({GameStatus status, GameModel board, String myName});
+
+  @override
+  $GameModelCopyWith<$Res> get board;
+}
+
+/// @nodoc
+class __$$GameStateImplCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res, _$GameStateImpl> implements _$$GameStateImplCopyWith<$Res> {
+  __$$GameStateImplCopyWithImpl(_$GameStateImpl _value, $Res Function(_$GameStateImpl) _then) : super(_value, _then);
+
+  /// Create a copy of GameState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? status = null,
+    Object? board = null,
+    Object? myName = null,
+  }) {
+    return _then(_$GameStateImpl(
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as GameStatus,
+      board: null == board
+          ? _value.board
+          : board // ignore: cast_nullable_to_non_nullable
+              as GameModel,
+      myName: null == myName
+          ? _value.myName
+          : myName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+class _$GameStateImpl implements _GameState {
+  const _$GameStateImpl({required this.status, required this.board, required this.myName});
+
+  @override
+  final GameStatus status;
+  @override
+  final GameModel board;
+  @override
+  final String myName;
 
   @override
   String toString() {
-    return 'GameState.initial()';
+    return 'GameState(status: $status, board: $board, myName: $myName)';
   }
 
   @override
   bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$InitialImpl);
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GameStateImpl &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.board, board) || other.board == board) &&
+            (identical(other.myName, myName) || other.myName == myName));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() success,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? success,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? success,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Initial implements GameState {
-  const factory _Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingImplCopyWith<$Res> {
-  factory _$$LoadingImplCopyWith(_$LoadingImpl value, $Res Function(_$LoadingImpl) then) = __$$LoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingImplCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res, _$LoadingImpl> implements _$$LoadingImplCopyWith<$Res> {
-  __$$LoadingImplCopyWithImpl(_$LoadingImpl _value, $Res Function(_$LoadingImpl) _then) : super(_value, _then);
+  int get hashCode => Object.hash(runtimeType, status, board, myName);
 
   /// Create a copy of GameState
   /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GameStateImplCopyWith<_$GameStateImpl> get copyWith => __$$GameStateImplCopyWithImpl<_$GameStateImpl>(this, _$identity);
 }
 
-/// @nodoc
-
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
+abstract class _GameState implements GameState {
+  const factory _GameState({required final GameStatus status, required final GameModel board, required final String myName}) = _$GameStateImpl;
 
   @override
-  String toString() {
-    return 'GameState.loading()';
-  }
-
+  GameStatus get status;
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$LoadingImpl);
-  }
-
+  GameModel get board;
   @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() success,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? success,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? success,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements GameState {
-  const factory _Loading() = _$LoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$SuccessImplCopyWith<$Res> {
-  factory _$$SuccessImplCopyWith(_$SuccessImpl value, $Res Function(_$SuccessImpl) then) = __$$SuccessImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$SuccessImplCopyWithImpl<$Res> extends _$GameStateCopyWithImpl<$Res, _$SuccessImpl> implements _$$SuccessImplCopyWith<$Res> {
-  __$$SuccessImplCopyWithImpl(_$SuccessImpl _value, $Res Function(_$SuccessImpl) _then) : super(_value, _then);
+  String get myName;
 
   /// Create a copy of GameState
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$SuccessImpl implements _Success {
-  const _$SuccessImpl();
-
   @override
-  String toString() {
-    return 'GameState.success()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType && other is _$SuccessImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() success,
-  }) {
-    return success();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? success,
-  }) {
-    return success?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Success implements GameState {
-  const factory _Success() = _$SuccessImpl;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GameStateImplCopyWith<_$GameStateImpl> get copyWith => throw _privateConstructorUsedError;
 }

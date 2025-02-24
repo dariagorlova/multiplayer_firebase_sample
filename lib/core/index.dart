@@ -16,3 +16,4 @@ export 'routing/index.dart';
 export 'widgets/app_button.dart';
 export 'models/user_model.dart';
 export 'models/game_model.dart';
+export 'models/word_model.dart';

@@ -17,12 +17,6 @@ class FirebaseWaitingGameService with FirebaseExceptionHandlerMixin implements W
   @override
   LoggerService get logService => _loggerService;
 
-  @override
-  String get currentUserId => _auth.currentUser?.uid ?? "";
-
-  @override
-  String get currentUserName => _auth.currentUser?.displayName ?? "";
-
   DocumentReference<Map<String, dynamic>> get _getActiveGamesDocRef =>
       _firestore.collection(FirebaseConsts.gamesCollection).doc(FirebaseConsts.activeGamesDoc);
 

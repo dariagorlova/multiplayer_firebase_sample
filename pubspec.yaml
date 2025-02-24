@@ -26,6 +26,8 @@ dependencies:
   flutter_svg: ^2.0.10+1
   logger: ^2.4.0
   typewrite_text: ^1.0.3
+  collection: ^1.19.0
+  google_gemini_ai: ^1.0.1
 
 dev_dependencies:
   flutter_test:

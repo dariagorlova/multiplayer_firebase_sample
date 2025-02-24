@@ -20,12 +20,19 @@ GameModel _$GameModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GameModel {
+  @JsonKey(name: FirebaseConsts.idField)
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: FirebaseConsts.userNameField)
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: FirebaseConsts.count)
   int get playersCount => throw _privateConstructorUsedError;
+  @JsonKey(name: FirebaseConsts.durationField)
   int get duration => throw _privateConstructorUsedError;
+  @JsonKey(name: FirebaseConsts.playersField)
   List<UserModel> get players => throw _privateConstructorUsedError;
-  List<String> get words => throw _privateConstructorUsedError;
+  @JsonKey(name: FirebaseConsts.words)
+  List<WordModel> get words => throw _privateConstructorUsedError;
+  @JsonKey(name: FirebaseConsts.curPlayerId)
   String get curPlayerId => throw _privateConstructorUsedError;
 
   /// Serializes this GameModel to a JSON map.
@@ -41,7 +48,14 @@ mixin _$GameModel {
 abstract class $GameModelCopyWith<$Res> {
   factory $GameModelCopyWith(GameModel value, $Res Function(GameModel) then) = _$GameModelCopyWithImpl<$Res, GameModel>;
   @useResult
-  $Res call({String id, String name, int playersCount, int duration, List<UserModel> players, List<String> words, String curPlayerId});
+  $Res call(
+      {@JsonKey(name: FirebaseConsts.idField) String id,
+      @JsonKey(name: FirebaseConsts.userNameField) String name,
+      @JsonKey(name: FirebaseConsts.count) int playersCount,
+      @JsonKey(name: FirebaseConsts.durationField) int duration,
+      @JsonKey(name: FirebaseConsts.playersField) List<UserModel> players,
+      @JsonKey(name: FirebaseConsts.words) List<WordModel> words,
+      @JsonKey(name: FirebaseConsts.curPlayerId) String curPlayerId});
 }
 
 /// @nodoc
@@ -90,7 +104,7 @@ class _$GameModelCopyWithImpl<$Res, $Val extends GameModel> implements $GameMode
       words: null == words
           ? _value.words
           : words // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<WordModel>,
       curPlayerId: null == curPlayerId
           ? _value.curPlayerId
           : curPlayerId // ignore: cast_nullable_to_non_nullable
@@ -104,7 +118,14 @@ abstract class _$$GameModelImplCopyWith<$Res> implements $GameModelCopyWith<$Res
   factory _$$GameModelImplCopyWith(_$GameModelImpl value, $Res Function(_$GameModelImpl) then) = __$$GameModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, int playersCount, int duration, List<UserModel> players, List<String> words, String curPlayerId});
+  $Res call(
+      {@JsonKey(name: FirebaseConsts.idField) String id,
+      @JsonKey(name: FirebaseConsts.userNameField) String name,
+      @JsonKey(name: FirebaseConsts.count) int playersCount,
+      @JsonKey(name: FirebaseConsts.durationField) int duration,
+      @JsonKey(name: FirebaseConsts.playersField) List<UserModel> players,
+      @JsonKey(name: FirebaseConsts.words) List<WordModel> words,
+      @JsonKey(name: FirebaseConsts.curPlayerId) String curPlayerId});
 }
 
 /// @nodoc
@@ -148,7 +169,7 @@ class __$$GameModelImplCopyWithImpl<$Res> extends _$GameModelCopyWithImpl<$Res, 
       words: null == words
           ? _value._words
           : words // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<WordModel>,
       curPlayerId: null == curPlayerId
           ? _value.curPlayerId
           : curPlayerId // ignore: cast_nullable_to_non_nullable
@@ -161,45 +182,50 @@ class __$$GameModelImplCopyWithImpl<$Res> extends _$GameModelCopyWithImpl<$Res, 
 @JsonSerializable()
 class _$GameModelImpl implements _GameModel {
   const _$GameModelImpl(
-      {required this.id,
-      required this.name,
-      required this.playersCount,
-      required this.duration,
-      final List<UserModel> players = const [],
-      final List<String> words = const [],
-      required this.curPlayerId})
+      {@JsonKey(name: FirebaseConsts.idField) required this.id,
+      @JsonKey(name: FirebaseConsts.userNameField) required this.name,
+      @JsonKey(name: FirebaseConsts.count) required this.playersCount,
+      @JsonKey(name: FirebaseConsts.durationField) required this.duration,
+      @JsonKey(name: FirebaseConsts.playersField) final List<UserModel> players = const [],
+      @JsonKey(name: FirebaseConsts.words) final List<WordModel> words = const [],
+      @JsonKey(name: FirebaseConsts.curPlayerId) required this.curPlayerId})
       : _players = players,
         _words = words;
 
   factory _$GameModelImpl.fromJson(Map<String, dynamic> json) => _$$GameModelImplFromJson(json);
 
   @override
+  @JsonKey(name: FirebaseConsts.idField)
   final String id;
   @override
+  @JsonKey(name: FirebaseConsts.userNameField)
   final String name;
   @override
+  @JsonKey(name: FirebaseConsts.count)
   final int playersCount;
   @override
+  @JsonKey(name: FirebaseConsts.durationField)
   final int duration;
   final List<UserModel> _players;
   @override
-  @JsonKey()
+  @JsonKey(name: FirebaseConsts.playersField)
   List<UserModel> get players {
     if (_players is EqualUnmodifiableListView) return _players;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_players);
   }
 
-  final List<String> _words;
+  final List<WordModel> _words;
   @override
-  @JsonKey()
-  List<String> get words {
+  @JsonKey(name: FirebaseConsts.words)
+  List<WordModel> get words {
     if (_words is EqualUnmodifiableListView) return _words;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_words);
   }
 
   @override
+  @JsonKey(name: FirebaseConsts.curPlayerId)
   final String curPlayerId;
 
   @override
@@ -243,29 +269,36 @@ class _$GameModelImpl implements _GameModel {
 
 abstract class _GameModel implements GameModel {
   const factory _GameModel(
-      {required final String id,
-      required final String name,
-      required final int playersCount,
-      required final int duration,
-      final List<UserModel> players,
-      final List<String> words,
-      required final String curPlayerId}) = _$GameModelImpl;
+      {@JsonKey(name: FirebaseConsts.idField) required final String id,
+      @JsonKey(name: FirebaseConsts.userNameField) required final String name,
+      @JsonKey(name: FirebaseConsts.count) required final int playersCount,
+      @JsonKey(name: FirebaseConsts.durationField) required final int duration,
+      @JsonKey(name: FirebaseConsts.playersField) final List<UserModel> players,
+      @JsonKey(name: FirebaseConsts.words) final List<WordModel> words,
+      @JsonKey(name: FirebaseConsts.curPlayerId) required final String curPlayerId}) = _$GameModelImpl;
 
   factory _GameModel.fromJson(Map<String, dynamic> json) = _$GameModelImpl.fromJson;
 
   @override
+  @JsonKey(name: FirebaseConsts.idField)
   String get id;
   @override
+  @JsonKey(name: FirebaseConsts.userNameField)
   String get name;
   @override
+  @JsonKey(name: FirebaseConsts.count)
   int get playersCount;
   @override
+  @JsonKey(name: FirebaseConsts.durationField)
   int get duration;
   @override
+  @JsonKey(name: FirebaseConsts.playersField)
   List<UserModel> get players;
   @override
-  List<String> get words;
+  @JsonKey(name: FirebaseConsts.words)
+  List<WordModel> get words;
   @override
+  @JsonKey(name: FirebaseConsts.curPlayerId)
   String get curPlayerId;
 
   /// Create a copy of GameModel

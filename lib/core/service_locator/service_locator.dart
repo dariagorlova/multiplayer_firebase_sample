@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../core_features/toast_notifications/di/di.dart';
 import '../../features/auth/di/di.dart';
+import '../../features/game/di/di.dart';
 import '../../features/game_host/di/di.dart';
 import '../../features/game_join/di/di.dart';
 import '../../features/game_waiting/di/di.dart';
@@ -21,4 +22,5 @@ Future<void> initDI() async {
   await HostGameFeatureDI.init();
   await JoinGameFeatureDI.init();
   await WaitingGameFeatureDI.init();
+  await GameFeatureDI.init();
 }
