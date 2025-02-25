@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:google_gemini_ai/google_gemini_ai.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:multiplayer_firebase_sample/core/constants/ai_key.dart';
 
 import '../../../core/index.dart';
@@ -8,10 +8,13 @@ import '../index.dart';
 
 class GeminiAiService implements AiService {
   final LoggerService _loggerService;
-  late final GoogleGemini _gemini;
+  late final GenerativeModel _gemini;
 
   GeminiAiService(LoggerService loggerService) : _loggerService = loggerService {
-    _gemini = GoogleGemini(apiKey: gemini_key);
+    _gemini = GenerativeModel(
+      model: 'gemini-1.5-flash-latest',
+      apiKey: gemini_key,
+    );
   }
 
   Future<String?> getDataFromAI({required String word}) async {
@@ -25,13 +28,14 @@ class GeminiAiService implements AiService {
         {
           "word": word, that you checked,
           "exist": true if correctly written in $language language, else: false,
-          "reason": if "exists" false, explain why here. otherwise, skip this field,
+          "reason": if "exists" false, explain why here in $language language. otherwise, skip this field,
           "noun": true if word is noun, false if not,
           "name": true if word is a name of a person, place, or brand, and there is no commonly used word with same meaning, false if not
         }      
         ''';
 
-      final response = await _gemini.generateFromText(prompt);
+      final response = await _gemini.generateContent([Content.text(prompt)]);
+      _loggerService.simple(response.text ?? 'No response from AI');
       final jsonAsText = _analyze(response.text);
 
       if (jsonAsText != null) {

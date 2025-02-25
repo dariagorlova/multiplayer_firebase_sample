@@ -54,5 +54,6 @@
   "wordDoesNotStartFromLastLetter": "The word must start from the letter that is the last letter of the last input word",
   "wordDoesNotNoun" : "This word is not a noun. Only nouns are allowed",
   "wordIsName" : "This word is a name of a person, place, or brand. Only proper nouns are allowed",
-  "notYourTurn" : "It's not your turn. Please wait"
+  "notYourTurn" : "It's not your turn. Please wait",
+  "wordAlreadyExists" : "Sorry, this word is already used."
 }

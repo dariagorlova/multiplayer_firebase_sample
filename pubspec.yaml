@@ -27,7 +27,7 @@ dependencies:
   logger: ^2.4.0
   typewrite_text: ^1.0.3
   collection: ^1.19.0
-  google_gemini_ai: ^1.0.1
+  google_generative_ai: ^0.4.6
 
 dev_dependencies:
   flutter_test:

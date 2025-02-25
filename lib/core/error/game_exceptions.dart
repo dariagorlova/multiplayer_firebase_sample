@@ -26,6 +26,7 @@ class GameExceptions implements LocalizedException {
       GameExceptionKeys.wordDoesNotNoun: loc.wordDoesNotNoun,
       GameExceptionKeys.wordIsName: loc.wordIsName,
       GameExceptionKeys.notYourTurn: loc.notYourTurn,
+      GameExceptionKeys.wordAlreadyExists: loc.wordAlreadyExists,
       GameExceptionKeys.unknownError: loc.unknownError,
     };
 

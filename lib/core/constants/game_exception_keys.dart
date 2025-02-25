@@ -11,4 +11,5 @@ abstract class GameExceptionKeys {
   static const wordIsName = 'word-is-name';
   static const notYourTurn = 'not-your-turn';
   static const unknownError = 'unknown-error';
+  static const wordAlreadyExists = 'word-already-exists';
 }

@@ -93,8 +93,13 @@ class GameCubit extends Cubit<GameState> {
       _notificationMediator.notify(const AppErrorNotification(GameExceptions(GameExceptionKeys.wordDoesNotStartFromLastLetter)));
       correctWord = false;
     }
+    //2. if the word is already used
+    if (board.words.any((wordModel) => wordModel.word == word)) {
+      _notificationMediator.notify(const AppErrorNotification(GameExceptions(GameExceptionKeys.wordAlreadyExists)));
+      correctWord = false;
+    }
 
-    //2. ask gemini if the word is exists in current language (for simplicity - just English)
+    //3. ask gemini if the word is exists in current language (for simplicity - just English)
     if (correctWord) {
       final res = await _repository.checkWordWithAI(word);
       if (res != null) {
@@ -106,7 +111,7 @@ class GameCubit extends Cubit<GameState> {
     try {
       final currentIndex = board.players.indexWhere((player) => player.id == board.curPlayerId);
       if (correctWord) {
-        // and if 1&2 are ok the word is correct and can be putted to dbase, and the next player can play
+        // and if 1&2&3 are ok the word is correct and can be putted to dbase, and the next player can play
         await _repository.addWordAndChangeUser(
           board.id,
           WordModel(word: word, userName: state.myName),
