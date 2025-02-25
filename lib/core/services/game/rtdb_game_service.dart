@@ -171,6 +171,15 @@ class RtdbGameService with FirebaseExceptionHandlerMixin implements GameService 
     return ''; // actualy we can't be here, cuz someone is launched this function, but...
   }
 
+  @override
+  Future<void> imAlive() async {
+    try {
+      _db.ref('${FirebaseConsts.rtdbStatusNode}/$currentUserId/${FirebaseConsts.lastActive}').set(ServerValue.timestamp);
+    } on FirebaseException catch (e, stack) {
+      handleFirebaseException(e, stack);
+    }
+  }
+
   Future<bool> _isOnline(String playerId) async {
     // just check if player is online in "status" node
     final snapshot = await _db.ref().child(FirebaseConsts.rtdbStatusNode).child(playerId).get();
@@ -183,19 +192,11 @@ class RtdbGameService with FirebaseExceptionHandlerMixin implements GameService 
     if (isOnline == null || lastActive == null) return false;
     if (!isOnline) return false;
 
-    //! BTW, onDisconnect function (firebase_online_status_service) will automatically update connection status... but time is money)))
-    //! it will update, but sometimes it takes up to a minute (yeap, expected behavior). For now, it's fine. For production, this is a way
-    //! to be kicked out from the office if you leave it as is. So, just an advice. During the game (in bloc, not from UI))) ), you should update
-    //! the field FirebaseConsts.lastActive by periodic timer for example every 2-5-7-10 seconds. And here you should analyze not only
-    //! isOnline field value, but also lastActive field value difference with now(). If the difference is greater then 2-5-7-10 seconds,
-    //! the user is already dead, but we did not realise it. and in this condition, we can just return false for such user.
-    //
-    //*** use something like this, for more strict conditions
-    // final lastActiveTime = DateTime.fromMillisecondsSinceEpoch(lastActive).toLocal();
-    // final difference = DateTime.now().difference(lastActiveTime).inSeconds.abs();
-    // if (difference > ...){
-    //   return false;
-    // }
+    final lastActiveTime = DateTime.fromMillisecondsSinceEpoch(lastActive).toLocal();
+    final difference = DateTime.now().difference(lastActiveTime).inSeconds.abs();
+    if (difference > AppConst.pingMaxLag) {
+      return false;
+    }
 
     return true;
   }

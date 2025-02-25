@@ -42,6 +42,7 @@ class _GameScreenState extends State<GameScreen> {
                 }[state.status];
                 variants?.go(context);
               },
+              buildWhen: (previous, current) => previous.status != current.status,
               builder: (context, state) {
                 if (state.status == GameStatus.initial) {
                   return const CircularProgressIndicator.adaptive();
@@ -52,11 +53,8 @@ class _GameScreenState extends State<GameScreen> {
                 if (countdownBloc.state.status == CountdownStatus.initial && state.board.duration > 0) {
                   countdownBloc.init(state.board.duration);
                 }
-                if (state.status == GameStatus.myTurn) {
-                  countdownBloc.start();
-                } else {
-                  countdownBloc.stop();
-                }
+
+                countdownBloc.start();
 
                 return Column(
                   children: [
@@ -94,7 +92,7 @@ class _GameScreenState extends State<GameScreen> {
                                 )
                                 .toList(),
                           ),
-                          const CountdownText(),
+                          CountdownText(showTimer: state.status == GameStatus.myTurn),
                         ],
                       ),
                     ),

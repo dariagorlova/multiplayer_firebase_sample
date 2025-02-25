@@ -34,4 +34,7 @@ class GameRepositoryImpl implements GameRepository {
 
   @override
   Future<String?> checkWordWithAI(String word) => _aiService.getDataFromAI(word: word);
+
+  @override
+  Future<void> ping() => _gameService.imAlive();
 }

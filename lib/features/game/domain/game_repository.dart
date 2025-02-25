@@ -9,4 +9,5 @@ abstract class GameRepository {
   Future<String> findNearestOnlinePlayerFromList(List<String> playersIds, String startFromId);
   Future<void> addWordAndChangeUser(String gameId, WordModel word, int wordIndex, String nextPlayerId);
   Future<String?> checkWordWithAI(String word);
+  Future<void> ping();
 }

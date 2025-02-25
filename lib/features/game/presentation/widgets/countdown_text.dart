@@ -5,7 +5,8 @@ import '../../../../gen/colors.gen.dart';
 import '../../index.dart';
 
 class CountdownText extends StatefulWidget {
-  const CountdownText({super.key});
+  const CountdownText({required this.showTimer, super.key});
+  final bool showTimer;
 
   @override
   State<CountdownText> createState() => _CountdownTextState();
@@ -24,7 +25,7 @@ class _CountdownTextState extends State<CountdownText> {
         }
       },
       builder: (context, state) {
-        if (state.status == CountdownStatus.stop) {
+        if (!widget.showTimer) {
           return const CircularProgressIndicator.adaptive();
         }
         return Text(bloc.asTimeString, style: timerTextStyle);

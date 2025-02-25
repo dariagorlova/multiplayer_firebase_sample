@@ -10,4 +10,5 @@ abstract class GameService {
   Future<void> changePlayer(String gameId, int fromIndex, String toId);
   Future<String> findNearestOnlinePlayerFromList(List<String> playersIds, String startFromId);
   Future<void> addWordAndChangeUser(String gameId, WordModel word, int wordIndex, String toId);
+  Future<void> imAlive();
 }

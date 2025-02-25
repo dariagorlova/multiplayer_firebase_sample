@@ -16,6 +16,8 @@ class GameCubit extends Cubit<GameState> {
   final NotificationMediator _notificationMediator;
   final LoggerService _logger;
 
+  Timer? _pingTimer;
+
   StreamSubscription<GameModel>? _gameSubscription;
 
   GameCubit(GameRepository repository, NotificationMediator notificationMediator, LoggerService logger)
@@ -29,6 +31,12 @@ class GameCubit extends Cubit<GameState> {
   Future<void> init(String id) async {
     emit(state.copyWith(myName: _repository.myName));
     _listenToChanges(id);
+
+    // that's how we will tell server that we are alive every 3 seconds we will update user's "lastActive" field
+    _pingTimer = Timer.periodic(const Duration(seconds: AppConst.pingDuration), (timer) {
+      // each update - 8 bytes.
+      _repository.ping();
+    });
   }
 
   void _listenToChanges(String id) {
@@ -130,7 +138,6 @@ class GameCubit extends Cubit<GameState> {
 
   Future<void> forceChangePlayer() async {
     //! better to do it as a periodic function, cuz in a moment of launch, another users online status can be faked.
-    //! for now it's ok. but to solve this you should use periodic function or use my advice from "rtdb_online_status_service.dart" - _isOnline()
 
     // this function is launched in countdown timer comes to 0 and there is no reaction from the current user.
     // this function can be launched NOT only from current user, but from the next online player of current game
@@ -151,10 +158,12 @@ class GameCubit extends Cubit<GameState> {
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     // bloc is destroyed, we don't need it any more
     _logger.simple('GameCubit is destroyed');
-    _gameSubscription?.cancel();
+    await _gameSubscription?.cancel();
+    _pingTimer?.cancel();
+    _pingTimer = null;
     return super.close();
   }
 }
