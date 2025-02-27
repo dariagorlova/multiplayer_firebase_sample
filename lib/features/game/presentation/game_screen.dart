@@ -15,6 +15,19 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
+  final ScrollController _scrollController = ScrollController();
+  void _scrollDown() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(
+          milliseconds: 750,
+        ),
+        curve: Curves.easeOutCirc,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<GameCubit>();
@@ -55,6 +68,7 @@ class _GameScreenState extends State<GameScreen> {
                 }
 
                 countdownBloc.start();
+                _scrollDown();
 
                 return Column(
                   children: [
@@ -96,10 +110,25 @@ class _GameScreenState extends State<GameScreen> {
                         ],
                       ),
                     ),
+                    // Expanded(
+                    //   child: SingleChildScrollView(
+                    //     child:
+                    //         Column(children: words.map((word) => BubbleWithWord(text: word.word, isSender: word.userName == state.myName)).toList()),
+                    //   ),
+                    // ),
                     Expanded(
-                      child: SingleChildScrollView(
-                        child:
-                            Column(children: words.map((word) => BubbleWithWord(text: word.word, isSender: word.userName == state.myName)).toList()),
+                      child: ListView.builder(
+                        controller: _scrollController,
+                        itemBuilder: (context, idx) {
+                          final content = words[idx];
+                          // return MessageWidget(
+                          //   text: content.text,
+                          //   image: content.image,
+                          //   isFromUser: content.fromUser,
+                          // );
+                          return BubbleWithWord(text: content.word, isSender: content.userName == state.myName);
+                        },
+                        itemCount: words.length,
                       ),
                     ),
                     // the way to send word

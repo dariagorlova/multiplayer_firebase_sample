@@ -22,8 +22,8 @@ class _AppState extends State<App> with RouterMixin {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthStatusBloc>(create: (context) => sl<AuthStatusBloc>(), lazy: false),
-        BlocProvider<UserNotificationCubit>(create: (context) => sl<UserNotificationCubit>(), lazy: false),
+        BlocProvider<AuthStatusBloc>(create: (context) => sl<AuthStatusBloc>()),
+        BlocProvider<UserNotificationCubit>(create: (context) => sl<UserNotificationCubit>()),
       ],
       child: GestureDetector(
         // this will hide virtual keyboard if you tab anywhere on screen's empty space
@@ -32,9 +32,7 @@ class _AppState extends State<App> with RouterMixin {
           scaffoldMessengerKey: scaffoldMessengerKey,
           title: AppConst.applicationName,
           debugShowCheckedModeBanner: false,
-          routerDelegate: router.routerDelegate,
-          routeInformationParser: router.routeInformationParser,
-          routeInformationProvider: router.routeInformationProvider,
+          routerConfig: router,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           builder: (context, child) => BlocListener<AuthStatusBloc, AuthStatusBlocState>(

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -63,13 +64,13 @@ class WaitingGameCubit extends Cubit<WaitingGameState> {
   }
 
   Future<void> launchCountdownTimer() async {
-    final conditions = {
+    // if any of map "keys" is true, we cant start game and should launch a notification error.
+    final notification = {
       state.status != WaitingStatus.waiting: const AppInfoNotification(GameMessages(GameMessageKeys.weAreAlmostIn)),
       state.host != _repository.myUid: const AppErrorNotification(GameExceptions(GameExceptionKeys.youCantStartGame)),
       state.playersIn < 2: const AppInfoNotification(GameMessages(GameMessageKeys.needMorePlayers)),
-    };
+    }.entries.cast<MapEntry<bool, AppNotification>?>().firstWhereOrNull((entry) => entry!.key)?.value;
 
-    final notification = conditions.entries.cast<MapEntry<bool, AppNotification>?>().firstWhere((entry) => entry!.key, orElse: () => null)?.value;
     if (notification != null) {
       _notificationMediator.notify(notification);
       return;

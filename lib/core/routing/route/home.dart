@@ -60,7 +60,6 @@ class GameRoute extends GoRouteData {
       BlocProvider<GameCubit>(
         create: (context) => sl<GameCubit>()..init(id),
         child: const GameScreen(),
-        lazy: false,
       ));
 }
 
