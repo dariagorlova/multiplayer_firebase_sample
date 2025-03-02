@@ -24,7 +24,8 @@ class _GameScreenState extends State<GameScreen> {
     super.dispose();
   }
 
-  void _scrollDown() {
+  void _scrollDown(CountdownCubit countdown) {
+    countdown.start();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
@@ -56,9 +57,10 @@ class _GameScreenState extends State<GameScreen> {
             create: (context) => sl<CountdownCubit>(param1: widget.duration),
             child: BlocConsumer<GameCubit, GameState>(
               listener: (context, state) {
+                final countdown = context.read<CountdownCubit>();
                 <GameStatus, void Function()>{
-                  GameStatus.myTurn: () => _scrollDown(),
-                  GameStatus.notMyTurn: () => _scrollDown(),
+                  GameStatus.myTurn: () => _scrollDown(countdown),
+                  GameStatus.notMyTurn: () => _scrollDown(countdown),
                   GameStatus.win: () => GameOverRoute(result: loc.winner).go(context),
                   GameStatus.lose: () => GameOverRoute(result: loc.loser).go(context),
                 }[state.status]
@@ -71,7 +73,6 @@ class _GameScreenState extends State<GameScreen> {
                 }
                 final words = state.board.words;
                 final firstChar = words.isEmpty ? loc.any : '\'${words.last.word[words.last.word.length - 1].toUpperCase()}\'';
-                context.read<CountdownCubit>().start();
 
                 return Column(
                   children: [
