@@ -11,14 +11,11 @@ part 'countdown_cubit.freezed.dart';
 class CountdownCubit extends Cubit<CountdownState> {
   Timer? _timer;
   final LoggerService _logger;
-  CountdownCubit(LoggerService logger)
+  final int duration;
+  CountdownCubit(this.duration, LoggerService logger)
       : _logger = logger,
-        super(CountdownState.initial()) {
+        super(CountdownState.initial(duration)) {
     _logger.simple('CountdownCubit is created');
-  }
-
-  void init(int maxSeconds) {
-    emit(state.copyWith(secondsPerPlayerMove: maxSeconds, time: Duration(seconds: maxSeconds)));
   }
 
   void _startTimer() {

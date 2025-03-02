@@ -8,7 +8,8 @@ import '../../../localization/l10n.dart';
 import '../index.dart';
 
 class GameScreen extends StatefulWidget {
-  const GameScreen({super.key});
+  const GameScreen({required this.duration, super.key});
+  final int duration;
 
   @override
   State<GameScreen> createState() => _GameScreenState();
@@ -16,6 +17,13 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   void _scrollDown() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _scrollController.animateTo(
@@ -45,15 +53,16 @@ class _GameScreenState extends State<GameScreen> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: BlocProvider(
-            create: (context) => sl<CountdownCubit>(),
+            create: (context) => sl<CountdownCubit>(param1: widget.duration),
             child: BlocConsumer<GameCubit, GameState>(
               listener: (context, state) {
-                final loc = context.l10n;
-                final variants = {
-                  GameStatus.win: GameOverRoute(result: loc.winner),
-                  GameStatus.lose: GameOverRoute(result: loc.loser),
-                }[state.status];
-                variants?.go(context);
+                <GameStatus, void Function()>{
+                  GameStatus.myTurn: () => _scrollDown(),
+                  GameStatus.notMyTurn: () => _scrollDown(),
+                  GameStatus.win: () => GameOverRoute(result: loc.winner).go(context),
+                  GameStatus.lose: () => GameOverRoute(result: loc.loser).go(context),
+                }[state.status]
+                    ?.call();
               },
               buildWhen: (previous, current) => previous.status != current.status,
               builder: (context, state) {
@@ -62,13 +71,7 @@ class _GameScreenState extends State<GameScreen> {
                 }
                 final words = state.board.words;
                 final firstChar = words.isEmpty ? loc.any : '\'${words.last.word[words.last.word.length - 1].toUpperCase()}\'';
-                final countdownBloc = context.read<CountdownCubit>();
-                if (countdownBloc.state.status == CountdownStatus.initial && state.board.duration > 0) {
-                  countdownBloc.init(state.board.duration);
-                }
-
-                countdownBloc.start();
-                _scrollDown();
+                context.read<CountdownCubit>().start();
 
                 return Column(
                   children: [
@@ -110,22 +113,11 @@ class _GameScreenState extends State<GameScreen> {
                         ],
                       ),
                     ),
-                    // Expanded(
-                    //   child: SingleChildScrollView(
-                    //     child:
-                    //         Column(children: words.map((word) => BubbleWithWord(text: word.word, isSender: word.userName == state.myName)).toList()),
-                    //   ),
-                    // ),
                     Expanded(
                       child: ListView.builder(
                         controller: _scrollController,
                         itemBuilder: (context, idx) {
                           final content = words[idx];
-                          // return MessageWidget(
-                          //   text: content.text,
-                          //   image: content.image,
-                          //   isFromUser: content.fromUser,
-                          // );
                           return BubbleWithWord(text: content.word, isSender: content.userName == state.myName);
                         },
                         itemCount: words.length,

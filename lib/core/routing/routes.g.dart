@@ -131,12 +131,14 @@ extension $WaitingGameRouteExtension on WaitingGameRoute {
 extension $GameRouteExtension on GameRoute {
   static GameRoute _fromState(GoRouterState state) => GameRoute(
         state.uri.queryParameters['id']!,
+        int.parse(state.uri.queryParameters['duration']!),
       );
 
   String get location => GoRouteData.$location(
         '/game-process',
         queryParams: {
           'id': id,
+          'duration': duration.toString(),
         },
       );
 

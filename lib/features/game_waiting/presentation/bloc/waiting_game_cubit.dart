@@ -56,6 +56,7 @@ class WaitingGameCubit extends Cubit<WaitingGameState> {
               count: count,
               playersIn: playersIn,
               host: host,
+              duration: waitingRoomData.duration,
             ),
           );
         }

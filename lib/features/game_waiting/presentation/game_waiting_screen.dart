@@ -51,7 +51,7 @@ class _GameWaitingScreenState extends State<GameWaitingScreen> {
                   if (state.status == WaitingStatus.quit) {
                     const HomeRoute().go(context);
                   } else if (state.status == WaitingStatus.ready) {
-                    GameRoute(state.id).go(context);
+                    GameRoute(state.id, state.duration).go(context);
                   }
                 },
                 builder: (context, state) {

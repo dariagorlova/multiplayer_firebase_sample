@@ -7,10 +7,8 @@ class ErrorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Text('Error'),
-          ],
+        child: Center(
+          child: Text('Error'),
         ),
       ),
     );

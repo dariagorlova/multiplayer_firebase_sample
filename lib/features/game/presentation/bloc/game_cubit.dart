@@ -110,20 +110,21 @@ class GameCubit extends Cubit<GameState> {
 
     try {
       final currentIndex = board.players.indexWhere((player) => player.id == board.curPlayerId);
+      final nextPlayerId = _nextPlayer(currentIndex);
       if (correctWord) {
         // and if 1&2&3 are ok the word is correct and can be putted to dbase, and the next player can play
         await _repository.addWordAndChangeUser(
           board.id,
           WordModel(word: word, userName: state.myName),
           board.words.length,
-          board.players[(currentIndex + 1) % board.players.length].id,
+          nextPlayerId,
         );
       } else {
         // if not, give current player +1 error, and the next player can play
         await _repository.changePlayer(
           board.id,
           currentIndex,
-          board.players[(currentIndex + 1) % board.players.length].id,
+          nextPlayerId,
         );
       }
     } on LocalizedException catch (e) {
@@ -147,19 +148,34 @@ class GameCubit extends Cubit<GameState> {
     // this function is launched in countdown timer comes to 0 and there is no reaction from the current user.
     // this function can be launched NOT only from current user, but from the next online player of current game
     try {
+      final board = state.board;
       // first things first, we have to find out who is the next player. let's get it's index from the players list
-      final currentIndex = state.board.players.indexWhere((player) => player.id == state.board.curPlayerId);
+      final currentIndex = board.players.indexWhere((player) => player.id == board.curPlayerId);
 
       // now, we have to find the nearest player from current (including current) who is online and can launch changePlayer
-      final nearestId = await _repository.findNearestOnlinePlayerFromList(state.board.players.map((e) => e.id).toList(), state.board.curPlayerId);
+      final nearestId = await _repository.findNearestOnlinePlayerFromList(board.players.map((e) => e.id).toList(), board.curPlayerId);
 
       // player is found and it's me. so, i have to launch changePlayer
       if (nearestId == _repository.myUid) {
-        await _repository.changePlayer(state.board.id, currentIndex, state.board.players[(currentIndex + 1) % state.board.players.length].id);
+        final nextPlayerId = _nextPlayer(currentIndex);
+
+        await _repository.changePlayer(board.id, currentIndex, nextPlayerId);
       }
     } on LocalizedException catch (e) {
       _notificationMediator.notify(AppErrorNotification(e));
     }
+  }
+
+  String _nextPlayer(int currentIndex) {
+    final board = state.board;
+    final nextPlayer = board.players
+        .skip(currentIndex + 1)
+        .followedBy(
+          board.players.take(currentIndex + 1),
+        )
+        .firstWhereOrNull((player) => player.errorCount < AppConst.maxErrors);
+
+    return nextPlayer?.id ?? board.curPlayerId;
   }
 
   @override

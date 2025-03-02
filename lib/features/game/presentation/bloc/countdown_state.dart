@@ -10,5 +10,6 @@ class CountdownState with _$CountdownState {
     required CountdownStatus status,
   }) = _CountdownState;
 
-  factory CountdownState.initial() => const CountdownState(secondsPerPlayerMove: 2, time: Duration.zero, status: CountdownStatus.initial);
+  factory CountdownState.initial(int secondsPerMove) =>
+      CountdownState(secondsPerPlayerMove: secondsPerMove, time: Duration(seconds: secondsPerMove), status: CountdownStatus.initial);
 }

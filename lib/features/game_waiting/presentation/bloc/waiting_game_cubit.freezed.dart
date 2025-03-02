@@ -21,6 +21,7 @@ mixin _$WaitingGameState {
   int get count => throw _privateConstructorUsedError;
   int get playersIn => throw _privateConstructorUsedError;
   String get host => throw _privateConstructorUsedError;
+  int get duration => throw _privateConstructorUsedError;
 
   /// Create a copy of WaitingGameState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +34,7 @@ abstract class $WaitingGameStateCopyWith<$Res> {
   factory $WaitingGameStateCopyWith(WaitingGameState value, $Res Function(WaitingGameState) then) =
       _$WaitingGameStateCopyWithImpl<$Res, WaitingGameState>;
   @useResult
-  $Res call({WaitingStatus status, String id, int count, int playersIn, String host});
+  $Res call({WaitingStatus status, String id, int count, int playersIn, String host, int duration});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$WaitingGameStateCopyWithImpl<$Res, $Val extends WaitingGameState> implem
     Object? count = null,
     Object? playersIn = null,
     Object? host = null,
+    Object? duration = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -77,6 +79,10 @@ class _$WaitingGameStateCopyWithImpl<$Res, $Val extends WaitingGameState> implem
           ? _value.host
           : host // ignore: cast_nullable_to_non_nullable
               as String,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -87,7 +93,7 @@ abstract class _$$WaitingGameStateImplCopyWith<$Res> implements $WaitingGameStat
       __$$WaitingGameStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({WaitingStatus status, String id, int count, int playersIn, String host});
+  $Res call({WaitingStatus status, String id, int count, int playersIn, String host, int duration});
 }
 
 /// @nodoc
@@ -105,6 +111,7 @@ class __$$WaitingGameStateImplCopyWithImpl<$Res> extends _$WaitingGameStateCopyW
     Object? count = null,
     Object? playersIn = null,
     Object? host = null,
+    Object? duration = null,
   }) {
     return _then(_$WaitingGameStateImpl(
       status: null == status
@@ -127,6 +134,10 @@ class __$$WaitingGameStateImplCopyWithImpl<$Res> extends _$WaitingGameStateCopyW
           ? _value.host
           : host // ignore: cast_nullable_to_non_nullable
               as String,
+      duration: null == duration
+          ? _value.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -134,7 +145,8 @@ class __$$WaitingGameStateImplCopyWithImpl<$Res> extends _$WaitingGameStateCopyW
 /// @nodoc
 
 class _$WaitingGameStateImpl implements _WaitingGameState {
-  const _$WaitingGameStateImpl({required this.status, required this.id, required this.count, required this.playersIn, required this.host});
+  const _$WaitingGameStateImpl(
+      {required this.status, required this.id, required this.count, required this.playersIn, required this.host, required this.duration});
 
   @override
   final WaitingStatus status;
@@ -146,10 +158,12 @@ class _$WaitingGameStateImpl implements _WaitingGameState {
   final int playersIn;
   @override
   final String host;
+  @override
+  final int duration;
 
   @override
   String toString() {
-    return 'WaitingGameState(status: $status, id: $id, count: $count, playersIn: $playersIn, host: $host)';
+    return 'WaitingGameState(status: $status, id: $id, count: $count, playersIn: $playersIn, host: $host, duration: $duration)';
   }
 
   @override
@@ -161,11 +175,12 @@ class _$WaitingGameStateImpl implements _WaitingGameState {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.count, count) || other.count == count) &&
             (identical(other.playersIn, playersIn) || other.playersIn == playersIn) &&
-            (identical(other.host, host) || other.host == host));
+            (identical(other.host, host) || other.host == host) &&
+            (identical(other.duration, duration) || other.duration == duration));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status, id, count, playersIn, host);
+  int get hashCode => Object.hash(runtimeType, status, id, count, playersIn, host, duration);
 
   /// Create a copy of WaitingGameState
   /// with the given fields replaced by the non-null parameter values.
@@ -182,7 +197,8 @@ abstract class _WaitingGameState implements WaitingGameState {
       required final String id,
       required final int count,
       required final int playersIn,
-      required final String host}) = _$WaitingGameStateImpl;
+      required final String host,
+      required final int duration}) = _$WaitingGameStateImpl;
 
   @override
   WaitingStatus get status;
@@ -194,6 +210,8 @@ abstract class _WaitingGameState implements WaitingGameState {
   int get playersIn;
   @override
   String get host;
+  @override
+  int get duration;
 
   /// Create a copy of WaitingGameState
   /// with the given fields replaced by the non-null parameter values.

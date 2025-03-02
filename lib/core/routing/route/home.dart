@@ -52,14 +52,15 @@ class WaitingGameRoute extends GoRouteData {
 
 class GameRoute extends GoRouteData {
   final String id;
-  const GameRoute(this.id);
+  final int duration;
+  const GameRoute(this.id, this.duration);
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) => FadeTransitionPage(
       state.pageKey,
       BlocProvider<GameCubit>(
         create: (context) => sl<GameCubit>()..init(id),
-        child: const GameScreen(),
+        child: GameScreen(duration: duration),
       ));
 }
 

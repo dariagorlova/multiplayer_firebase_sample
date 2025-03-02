@@ -17,13 +17,21 @@ class App extends StatefulWidget {
 class _AppState extends State<App> with RouterMixin {
   var _shouldCloseOfflineDialog = false;
   var _isInitiallyConnected = true;
+  late final UserNotificationCubit _notifications;
+  late final AuthStatusBloc _authStatusBloc;
+  @override
+  void initState() {
+    super.initState();
+    _authStatusBloc = sl<AuthStatusBloc>();
+    _notifications = sl<UserNotificationCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthStatusBloc>(create: (context) => sl<AuthStatusBloc>()),
-        BlocProvider<UserNotificationCubit>(create: (context) => sl<UserNotificationCubit>()),
+        BlocProvider<AuthStatusBloc>.value(value: _authStatusBloc),
+        BlocProvider<UserNotificationCubit>.value(value: _notifications),
       ],
       child: GestureDetector(
         // this will hide virtual keyboard if you tab anywhere on screen's empty space
@@ -32,7 +40,7 @@ class _AppState extends State<App> with RouterMixin {
           scaffoldMessengerKey: scaffoldMessengerKey,
           title: AppConst.applicationName,
           debugShowCheckedModeBanner: false,
-          routerConfig: router,
+          routerConfig: createRouter(_authStatusBloc),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           builder: (context, child) => BlocListener<AuthStatusBloc, AuthStatusBlocState>(
