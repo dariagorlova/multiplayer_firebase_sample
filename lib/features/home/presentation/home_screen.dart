@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:multiplayer_firebase_sample/core/index.dart';
 import 'package:multiplayer_firebase_sample/localization/l10n.dart';
 
+import '../../../gen/assets.gen.dart';
 import '../../auth/index.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -24,25 +25,28 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AppButton(
-                  child: Text(loc.joinGame.toUpperCase()),
-                  onTap: () {
-                    context.go(const JoinGameRoute().location);
-                  }),
-              const SizedBox(height: 16),
-              AppButton(
-                  child: Text(loc.hostGame.toUpperCase()),
-                  onTap: () {
-                    context.go(const HostGameRoute().location);
-                  }),
-            ],
+        child: Stack(children: [
+          Assets.images.flutteristas.image(width: 200),
+          Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppButton(
+                    child: Text(loc.joinGame.toUpperCase()),
+                    onTap: () {
+                      context.go(const JoinGameRoute().location);
+                    }),
+                const SizedBox(height: 16),
+                AppButton(
+                    child: Text(loc.hostGame.toUpperCase()),
+                    onTap: () {
+                      context.go(const HostGameRoute().location);
+                    }),
+              ],
+            ),
           ),
-        ),
+        ]),
       ),
     );
   }

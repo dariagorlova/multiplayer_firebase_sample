@@ -31,6 +31,10 @@ service cloud.firestore {
     match /games/{gameId} {
       allow read, write: if isAuthorized();
     }
+
+    match /games/active_games/waiting_games/{waitingGameId} {
+      allow read, write: if isAuthorized();
+    }
   }
 }
 ```
