@@ -1,13 +1,14 @@
 # multiplayer_firebase_sample
 
-A Multiplayer game sample project.
+A Multiplayer game sample project for Flutteristas 2025 conference.
+Flutter version: 3.27.0 
 
 ## Getting Started
 
 To make it work at your side you have to:
 1. Create a Firebase project in your Firebase console (https://console.firebase.google.com/)
 2. Create Firestore database (Build / Firestore Database section)
-3. Sheet Rules have to contain such rules:
+3. Tab "Rules" have to contain such rules:
 ```
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -40,7 +41,7 @@ service cloud.firestore {
 ```
 
 4. Create Realtime database (Build / Realtime Database section)
-5. Sheet Rules have to contain such rules:
+5. Tab "Rules" have to contain such rules:
 ```
 {
   "rules": {

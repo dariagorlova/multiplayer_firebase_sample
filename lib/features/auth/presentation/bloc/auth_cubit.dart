@@ -50,8 +50,8 @@ class AuthCubit extends Cubit<AuthState> {
       await _repository.signOut();
     } on LocalizedException catch (e) {
       _notificationMediator.notify(AppErrorNotification(e));
-      emit(const AuthState.initial());
     }
+    emit(const AuthState.initial());
   }
 
   @override

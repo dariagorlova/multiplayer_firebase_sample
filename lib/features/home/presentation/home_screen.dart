@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:multiplayer_firebase_sample/core/index.dart';
 import 'package:multiplayer_firebase_sample/localization/l10n.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
             style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent),
             icon: const Icon(Icons.logout),
             label: Text(loc.logout.toUpperCase()),
-            onPressed: () => sl<AuthCubit>().signOut(),
+            onPressed: () => context.read<AuthCubit>().signOut(),
           )
         ],
       ),

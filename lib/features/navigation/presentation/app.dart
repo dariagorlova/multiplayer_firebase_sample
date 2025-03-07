@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/index.dart';
 import '../../../core_features/toast_notifications/index.dart';
 import '../../../localization/l10n.dart';
+import '../../auth/index.dart';
 import '../index.dart';
 
 class App extends StatefulWidget {
@@ -32,6 +33,9 @@ class _AppState extends State<App> with RouterMixin {
       providers: [
         BlocProvider<AuthStatusBloc>.value(value: _authStatusBloc),
         BlocProvider<UserNotificationCubit>.value(value: _notifications),
+        BlocProvider<AuthCubit>(
+          create: (context) => sl<AuthCubit>(),
+        )
       ],
       child: GestureDetector(
         // this will hide virtual keyboard if you tab anywhere on screen's empty space
