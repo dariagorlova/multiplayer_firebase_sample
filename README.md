@@ -3,6 +3,14 @@
 A Multiplayer game sample project for Flutteristas 2025 conference.
 Flutter version: 3.27.0 
 
+## Game Rules
+
+1. Only commonly used nouns are allowed (no names, brands, or places).
+2. No repeating words.
+3. The first player enters any word.
+4. Each new word must start with the last letter of the previous word.
+5. A player loses if they reach three mistakes. The last remaining player wins.
+
 ## Getting Started
 
 To make it work at your side you have to:
@@ -61,8 +69,9 @@ service cloud.firestore {
 ```
 6. Install and activate flutterfire_cli (https://firebase.flutter.dev/docs/cli/)
 7. With a help of "flutterfire configure" command attach firebase project to this Flutter project
-8. Enable "Anonymous" sign-in method in Firebase console in Build / Authentication section
-9. Also, you should create a file "lib/core/constants/ai_key.dart" and put your Gemini API key inside
+8. Make sure you did everything step by step and your configuration file firebase_options.dart contains "databaseURL" field 
+9. Enable "Anonymous" sign-in method in Firebase console in Build / Authentication section
+10. Also, you should create a file "lib/core/constants/ai_key.dart" and put your Gemini API key inside
 ```
 const gemini_key = '-== your gemini key ==-';
 ```
