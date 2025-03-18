@@ -65,7 +65,7 @@ class GameRoute extends GoRouteData {
 }
 
 class GameOverRoute extends GoRouteData {
-  final String result;
+  final bool result;
   const GameOverRoute({required this.result});
 
   @override

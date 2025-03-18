@@ -153,13 +153,13 @@ extension $GameRouteExtension on GameRoute {
 
 extension $GameOverRouteExtension on GameOverRoute {
   static GameOverRoute _fromState(GoRouterState state) => GameOverRoute(
-        result: state.uri.queryParameters['result']!,
+        result: _$boolConverter(state.uri.queryParameters['result']!),
       );
 
   String get location => GoRouteData.$location(
         '/game-over',
         queryParams: {
-          'result': result,
+          'result': result.toString(),
         },
       );
 
@@ -170,4 +170,15 @@ extension $GameOverRouteExtension on GameOverRoute {
   void pushReplacement(BuildContext context) => context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
+}
+
+bool _$boolConverter(String value) {
+  switch (value) {
+    case 'true':
+      return true;
+    case 'false':
+      return false;
+    default:
+      throw UnsupportedError('Cannot convert "$value" into a bool.');
+  }
 }

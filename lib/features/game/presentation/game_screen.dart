@@ -61,8 +61,8 @@ class _GameScreenState extends State<GameScreen> {
                 <GameStatus, void Function()>{
                   GameStatus.myTurn: () => _scrollDown(countdown),
                   GameStatus.notMyTurn: () => _scrollDown(countdown),
-                  GameStatus.win: () => GameOverRoute(result: loc.winner).go(context),
-                  GameStatus.lose: () => GameOverRoute(result: loc.loser).go(context),
+                  GameStatus.win: () => const GameOverRoute(result: true).go(context),
+                  GameStatus.lose: () => const GameOverRoute(result: false).go(context),
                 }[state.status]
                     ?.call();
               },

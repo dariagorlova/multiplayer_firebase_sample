@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:multiplayer_firebase_sample/gen/colors.gen.dart';
 
 class TextformWithTitle extends StatelessWidget {
   const TextformWithTitle({required this.title, required this.controller, this.keyboardType = TextInputType.number, super.key});
@@ -9,6 +12,8 @@ class TextformWithTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
@@ -19,15 +24,19 @@ class TextformWithTitle extends StatelessWidget {
             style: const TextStyle(fontSize: 16, color: Colors.deepPurple, fontWeight: FontWeight.bold),
           ),
           SizedBox(
-            width: 150,
-            height: 50,
-            child: TextFormField(
-              controller: controller,
-              keyboardType: keyboardType,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-              )),
+            width: min(150, screenSize.width * 0.4),
+            height: min(50, screenSize.height * 0.1),
+            child: Center(
+              child: TextFormField(
+                controller: controller,
+                keyboardType: keyboardType,
+                decoration: InputDecoration(
+                    fillColor: AppColors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    )),
+              ),
             ),
           )
         ],

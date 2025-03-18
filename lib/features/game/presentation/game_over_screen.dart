@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../gen/assets.gen.dart';
 import '../../../localization/l10n.dart';
 import '../../../core/index.dart';
 
 class GameOverScreen extends StatelessWidget {
-  final String result;
+  final bool result;
   const GameOverScreen({required this.result, super.key});
 
   @override
@@ -15,7 +16,8 @@ class GameOverScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(result),
+            result ? Assets.images.winner.image(height: 200) : Assets.images.looser.image(height: 200),
+            const SizedBox(height: 16),
             AppButton(
               child: Text(context.l10n.backToHome.toUpperCase()),
               onTap: () => const HomeRoute().go(context),

@@ -18,8 +18,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/flutteristas.png
   AssetGenImage get flutteristas => const AssetGenImage('assets/images/flutteristas.png');
 
+  /// File path: assets/images/looser.png
+  AssetGenImage get looser => const AssetGenImage('assets/images/looser.png');
+
+  /// File path: assets/images/winner.png
+  AssetGenImage get winner => const AssetGenImage('assets/images/winner.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [flutteristas];
+  List<AssetGenImage> get values => [flutteristas, looser, winner];
 }
 
 class $AssetsSvgGen {
